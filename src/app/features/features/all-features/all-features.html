@@ -8,35 +8,10 @@
       <p class="max-w-123 text-body-md text-fg-secondary">{{ content.catalog.description }}</p>
     </div>
 
-    <div class="relative">
-      <!-- From xl the groups scroll inside a one-row window, snapping to each pair of cards. -->
-      <div
-        #viewport
-        class="groups-viewport flex flex-col xl:h-110.5 xl:snap-y xl:snap-mandatory xl:gap-6 xl:overflow-y-auto"
-        (scroll)="syncRow()"
-      >
-        @for (group of content.catalog.groups; track group.title) {
-          <app-all-features-group [content]="group" />
-        }
-      </div>
-
-      <!-- One dot per pair of cards, stacked beside the window to show where the scroll stands. -->
-      <div
-        class="hidden xl:absolute xl:top-1/2 xl:-end-10 xl:flex xl:-translate-y-1/2 xl:flex-col xl:gap-1.5"
-        role="group"
-        [attr.aria-label]="content.catalog.title"
-      >
-        @for (label of rowLabels; track $index; let i = $index) {
-          <button
-            type="button"
-            class="relative w-1.5 cursor-pointer rounded-full transition-all duration-300 ease-in-out before:absolute before:-inset-x-2 before:-inset-y-0.5 motion-reduce:transition-none"
-            [class]="i === activeRow() ? 'h-5.5 bg-brand' : 'h-1.5 bg-brand/18'"
-            [attr.aria-label]="label"
-            [attr.aria-current]="i === activeRow() ? 'true' : null"
-            (click)="goToRow(i)"
-          ></button>
-        }
-      </div>
+    <div class="flex flex-col">
+      @for (group of content.catalog.groups; track group.title) {
+        <app-all-features-group [content]="group" />
+      }
     </div>
   </div>
 </section>
