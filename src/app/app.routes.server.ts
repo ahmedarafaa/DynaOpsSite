@@ -31,5 +31,6 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'features/commission-management', renderMode: RenderMode.Prerender },
   { path: 'features', renderMode: RenderMode.Prerender },
   { path: 'integration', renderMode: RenderMode.Prerender },
+  { path: 'about', renderMode: RenderMode.Prerender },
   { path: '**', renderMode: RenderMode.Server },
 ];

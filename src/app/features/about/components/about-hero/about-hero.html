@@ -1,0 +1,39 @@
+<div class="container-page py-8 xl:py-16">
+  <div class="mx-auto flex max-w-204.25 flex-col items-center gap-6 text-center">
+    <!-- Stacked below xl as in the tablet and phone frames; a row from xl. -->
+    <div class="flex flex-col items-center gap-2 xl:flex-row">
+      <img
+        [ngSrc]="content().product.src"
+        [alt]="content().product.alt"
+        width="267"
+        height="60"
+        priority
+        class="w-66.75"
+      />
+      <p class="flex w-57.5 items-center gap-2 text-h3 text-fg-brand">
+        <span
+          aria-hidden="true"
+          class="h-0.5 flex-1 bg-linear-to-l/srgb from-brand-500 to-transparent rtl:bg-linear-to-r/srgb"
+        ></span>
+        <span class="whitespace-nowrap">{{ content().link }}</span>
+        <span
+          aria-hidden="true"
+          class="h-0.5 flex-1 bg-linear-to-r/srgb from-brand-500 to-transparent rtl:bg-linear-to-l/srgb"
+        ></span>
+      </p>
+      <img
+        [ngSrc]="content().company.src"
+        [alt]="content().company.alt"
+        width="267"
+        height="60"
+        priority
+        class="w-66.75"
+      />
+    </div>
+    <!-- Figma boxes: 744px title and 646px description. -->
+    <h1 class="max-w-186 text-h3 whitespace-pre-line">{{ content().title }}</h1>
+    <p class="max-w-161.5 text-body-md whitespace-pre-line text-fg-secondary">
+      {{ content().description }}
+    </p>
+  </div>
+</div>

@@ -62,6 +62,19 @@
   line-height: 4.545cqw;
 }
 
+/* Arabic mirrors the layout around the 440px frame's centre: the spread stack sits 240px further right and slides the other way. */
+.stage {
+  --dir: 1;
+}
+
+.stage:dir(rtl) {
+  --dir: -1;
+}
+
+.art:dir(rtl) {
+  translate: 54.545% 0;
+}
+
 /*
  * Figma loops seven variants with Smart Animate (600ms ease-out) and after-delay holds, 12.2s in all:
  * stacked at the end side, spread out, slide to the start, labels appear bottom to top, fade out, then the stack collapses back.
@@ -106,14 +119,14 @@
 @keyframes stack-slide {
   0%,
   18.033% {
-    translate: 52.27% 0;
+    translate: calc(var(--dir) * 52.27%) 0;
   }
   22.951%,
   95.082% {
     translate: 0 0;
   }
   100% {
-    translate: 52.27% 0;
+    translate: calc(var(--dir) * 52.27%) 0;
   }
 }
 

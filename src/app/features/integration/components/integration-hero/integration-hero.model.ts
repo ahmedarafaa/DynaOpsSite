@@ -1,4 +1,4 @@
-import type { IntegrationStackContent } from '../integration-stack/integration-stack.model';
+import type { ErpStackContent } from '../../../../shared/ui/erp-stack/erp-stack.model';
 
 export interface IntegrationHeroBadge {
   // Root-relative logo shown on the white tile.
@@ -18,7 +18,7 @@ export interface IntegrationHeroContent {
   // Semibold phrase inside the subtitle.
   emphasis: string;
   cta: IntegrationHeroCta;
-  stack: IntegrationStackContent;
+  stack: ErpStackContent;
 }
 
 // The subtitle split around its emphasis.

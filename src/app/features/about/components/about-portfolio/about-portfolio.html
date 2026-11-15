@@ -1,0 +1,100 @@
+<div class="container-page">
+  <div class="mx-auto flex w-full max-w-300 flex-col items-center gap-12 xl:gap-16">
+    <div class="flex max-w-160 flex-col items-center gap-4 text-center xl:max-w-none">
+      <div class="flex gap-1.25 rounded-full bg-subtle px-2 py-1.5">
+        @for (logo of content().logos; track logo.src) {
+          <span
+            class="flex size-11.5 items-center justify-center rounded-full bg-surface p-1.5 shadow-xs"
+          >
+            <img
+              [src]="logo.src"
+              alt=""
+              [width]="logo.width"
+              [height]="logo.height"
+              class="h-6.5 w-auto"
+            />
+          </span>
+        }
+      </div>
+      <h2 class="text-h3 md:text-h2 xl:text-display-md">{{ content().title }}</h2>
+      <!-- Figma boxes: 620px and 592px. -->
+      @for (paragraph of content().paragraphs; track $index; let first = $first) {
+        <p class="text-body-md text-fg-secondary" [class]="first ? 'max-w-155' : 'max-w-148'">
+          {{ paragraph }}
+        </p>
+      }
+    </div>
+
+    <!-- Open below xl; from xl one card at a time opens, on Figma's 2s loop, until a card is clicked. -->
+    <div
+      #row
+      class="cards flex w-full flex-col gap-4 xl:h-84 xl:flex-row"
+      [class.picked]="selected() !== null"
+    >
+      @for (product of content().products; track product.name; let i = $index) {
+        <article
+          #card
+          class="product card relative gap-3 overflow-hidden p-4 md:gap-6"
+          [class]="'product-' + i"
+        >
+          <!-- Covers the card from xl, where cards open on click; every card is already open below. -->
+          <button
+            type="button"
+            class="absolute inset-0 z-2 hidden cursor-pointer rounded-lg xl:block"
+            [attr.aria-label]="product.name"
+            [attr.aria-pressed]="selected() === i"
+            (click)="select(i)"
+          ></button>
+          <div
+            class="banner relative flex h-23 shrink-0 md:h-47.5 items-center justify-center overflow-hidden rounded-md bg-linear-to-b/srgb px-4"
+            [class]="toneClass[product.tone]"
+          >
+            <img
+              [src]="product.mark.src"
+              alt=""
+              [width]="product.mark.width"
+              [height]="product.mark.height"
+              loading="lazy"
+              class="mark absolute inset-0 m-auto w-35 max-w-none"
+            />
+            <div
+              class="lockup flex max-w-full min-w-0 items-center gap-7"
+              [class.w-100]="product.lockup.length > 1 && !product.tagline"
+              [class.justify-between]="product.lockup.length > 1 && !product.tagline"
+            >
+              <img
+                [src]="product.lockup[0].src"
+                [alt]="product.name"
+                [width]="product.lockup[0].width"
+                [height]="product.lockup[0].height"
+                loading="lazy"
+                class="h-auto min-w-0 shrink"
+              />
+              @if (product.lockup[1]; as wordmark) {
+                <div class="flex min-w-0 shrink flex-col items-start gap-5">
+                  <img
+                    [src]="wordmark.src"
+                    alt=""
+                    [width]="wordmark.width"
+                    [height]="wordmark.height"
+                    loading="lazy"
+                    class="h-auto min-w-0"
+                  />
+                  @if (product.tagline; as tagline) {
+                    <p lang="en" class="text-label-md text-fg-inverse">{{ tagline }}</p>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+          <!-- From xl the copy keeps the open card's text box at Figma's 230px (16 padding + 190 banner + 24 gap), so it never reflows while the card resizes. -->
+          <div class="details flex flex-col gap-1 md:gap-3 xl:absolute xl:start-4 xl:top-57.5">
+            <!-- Product names stay English in both languages, so they keep the Latin font and line height, as in the Arabic frame. -->
+            <h3 lang="en" class="text-h3 md:text-h2 xl:whitespace-nowrap">{{ product.name }}</h3>
+            <p class="text-body-md text-fg-secondary">{{ product.description }}</p>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</div>

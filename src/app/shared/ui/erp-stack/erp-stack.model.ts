@@ -1,11 +1,11 @@
 // One tier of the stack, top to bottom: DynaOps SFA, the integration layer, Dynamics 365 F&O.
-export interface IntegrationStackLabel {
+export interface ErpStackLabel {
   title: string;
   description: string;
 }
 
 // Same-viewBox layers of the 440x309 Figma artwork, stacked so each tier can move on its own.
-export interface IntegrationStackImages {
+export interface ErpStackImages {
   tileBottom: string;
   glowLower: string;
   tileMiddle: string;
@@ -15,7 +15,7 @@ export interface IntegrationStackImages {
   connector: string;
 }
 
-export interface IntegrationStackContent {
-  images: IntegrationStackImages;
-  labels: IntegrationStackLabel[];
+export interface ErpStackContent {
+  images: ErpStackImages;
+  labels: ErpStackLabel[];
 }

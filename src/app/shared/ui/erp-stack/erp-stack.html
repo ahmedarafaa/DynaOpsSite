@@ -1,13 +1,13 @@
 <div class="stage">
-  <!-- Figma mirrors the artwork in Arabic; translating inside the flip mirrors the slide too. -->
-  <div aria-hidden="true" class="absolute inset-0 rtl:-scale-x-100">
+  <!-- Figma's Arabic set mirrors the layout but not the logos, so the stack moves instead of flipping. -->
+  <div aria-hidden="true" class="art absolute inset-0">
     <div class="stack absolute inset-0">
       <img
         [ngSrc]="content().images.tileBottom"
         alt=""
         width="440"
         height="309"
-        priority
+        [priority]="priority()"
         class="absolute start-0 top-0 w-full"
       />
       <div class="tier tier-middle absolute inset-0">
@@ -23,7 +23,7 @@
           alt=""
           width="440"
           height="309"
-          priority
+          [priority]="priority()"
           class="absolute start-0 top-0 w-full"
         />
       </div>
@@ -40,7 +40,7 @@
           alt=""
           width="440"
           height="309"
-          priority
+          [priority]="priority()"
           class="absolute start-0 top-0 w-full"
         />
       </div>

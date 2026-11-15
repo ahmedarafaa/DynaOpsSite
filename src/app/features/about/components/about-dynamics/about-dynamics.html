@@ -1,0 +1,19 @@
+<div class="container-page py-8 xl:py-16">
+  <div
+    class="mx-auto flex w-full max-w-300 flex-col items-center gap-8 xl:flex-row xl:items-start xl:justify-between xl:gap-6"
+  >
+    <div class="flex w-full max-w-160 flex-col gap-4 text-center xl:max-w-121.25 xl:text-start">
+      <h2 class="text-h3 md:text-h2 xl:text-display-md">{{ content().title }}</h2>
+      @for (part of paragraphParts(); track $index) {
+        <!-- One line, so no space is rendered beside the emphasis (before a comma, for one). -->
+        <!-- prettier-ignore -->
+        <p class="text-body-md text-fg-secondary">{{ part.before }}@if (part.emphasis) {<strong class="font-semibold">{{ part.emphasis }}</strong>}{{ part.after }}</p>
+      }
+    </div>
+
+    <app-erp-stack
+      class="order-first w-full max-w-110 shrink-0 xl:order-none"
+      [content]="content().stack"
+    />
+  </div>
+</div>

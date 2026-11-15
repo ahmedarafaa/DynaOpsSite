@@ -1,3 +1,4 @@
+import { ERP_STACK_IMAGES } from '../../shared/ui/erp-stack/erp-stack-content';
 import { pickFeatureCards } from '../../shared/ui/feature-card/feature-card-content';
 import type { IntegrationContent } from './integration.model';
 
@@ -18,14 +19,7 @@ export const INTEGRATION_CONTENT: IntegrationContent = {
     emphasis: $localize`:@@integration.hero.emphasis:Microsoft Dynamics 365 Finance & Operations`,
     cta: { label: $localize`:@@integration.hero.cta:Book a Demo`, href: demo },
     stack: {
-      images: {
-        tileBottom: `${dir}/tile-bottom.svg`,
-        glowLower: `${dir}/glow-lower.svg`,
-        tileMiddle: `${dir}/tile-middle.svg`,
-        glowUpper: `${dir}/glow-upper.svg`,
-        tileTop: `${dir}/tile-top.svg`,
-        connector: `${dir}/connector.svg`,
-      },
+      images: ERP_STACK_IMAGES,
       labels: [
         {
           title: $localize`:@@integration.hero.stack.sfa.title:DynaOps SFA`,

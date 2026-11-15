@@ -4,6 +4,7 @@
     "integration.title": "تكامل Dynamics 365 F&O مع المبيعات الميدانية",
     "integration.description": "وسّع تكامل Dynamics 365 F&O ليشمل المبيعات الميدانية: العملاء والأسعار والمخزون والطلبات والتحصيلات في DynaOps، مع بقاء D365 مصدر البيانات الرئيسي.",
     "integration.imageDir": "/images/integration-ar",
+    "erp-stack.imageDir": "/images/integration-ar",
     "integration.hero.badge": "تكامل مباشر مع Dynamics 365 F&O",
     "integration.hero.title": "وسّع استخدام D365 Finance & Operations ليصل إلى فريق المبيعات",
     "integration.hero.subtitle": "يربط DynaOps SFA أنشطة المبيعات الميدانية بنظام Microsoft Dynamics 365 Finance & Operations، ليمنح المندوبين المعلومات التي يحتاجون إليها أثناء العمل، مع بقاء Dynamics 365 هو نظام ERP الأساسي ومصدر البيانات الرئيسي للشركة.",

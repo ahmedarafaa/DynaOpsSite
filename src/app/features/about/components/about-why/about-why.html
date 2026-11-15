@@ -1,0 +1,73 @@
+<!-- Figma panel: edge to edge below xl with the page gutter as padding, a bordered 1200px panel from xl. -->
+<div class="xl:container-page">
+  <div
+    class="mx-auto flex w-full max-w-300 flex-col items-center gap-8 bg-canvas px-4 py-8 md:rounded-xl md:px-8 md:py-16 xl:gap-16 xl:border xl:border-line-subtle xl:p-20"
+  >
+    <h2 class="text-center text-h3 md:text-h2 xl:text-display-md">{{ content().title }}</h2>
+
+    <div class="flex w-full flex-col items-center gap-6 xl:max-w-260">
+      <div class="grid w-full gap-4 xl:grid-cols-2">
+        @for (challenge of content().challenges; track challenge.title) {
+          <article class="card min-w-0 gap-6 p-4 shadow-sm md:p-6">
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-4">
+                <span
+                  class="flex size-12 shrink-0 items-center justify-center rounded-md bg-brand-subtle"
+                >
+                  <img [src]="challenge.icon" alt="" width="24" height="24" class="size-6" />
+                </span>
+                <h3 class="text-h3">{{ challenge.title }}</h3>
+              </div>
+              <p class="text-body-md text-fg-secondary">{{ challenge.description }}</p>
+            </div>
+            <div
+              class="art-panel mt-auto flex justify-center overflow-hidden rounded-md px-4 pt-4 md:h-65"
+            >
+              <img
+                [src]="challenge.art.src"
+                alt=""
+                [width]="challenge.art.width"
+                [height]="challenge.art.height"
+                loading="lazy"
+                class="h-auto w-full max-w-(--art-width) min-w-0 self-start"
+                [style.--art-width.px]="challenge.art.width"
+              />
+            </div>
+          </article>
+        }
+      </div>
+
+      <span
+        class="flex size-12 items-center justify-center rounded-full border border-line bg-surface"
+      >
+        <img [src]="content().arrow" alt="" width="24" height="24" class="size-6" />
+      </span>
+
+      <article class="card w-full gap-6 bg-brand p-4 text-fg-inverse shadow-sm md:p-6 xl:flex-row">
+        <div class="flex flex-col gap-4 xl:w-121">
+          <div class="flex items-center gap-4">
+            <span class="flex size-12 shrink-0 items-center justify-center rounded-md bg-surface">
+              <img [src]="content().solution.icon" alt="" width="24" height="24" class="size-6" />
+            </span>
+            <h3 class="text-h3">{{ content().solution.label }}</h3>
+          </div>
+          <p class="max-w-98 text-h3 whitespace-pre-line md:text-h2">
+            {{ content().solution.title }}
+          </p>
+          <p class="text-body-md">{{ content().solution.description }}</p>
+        </div>
+        <!-- The art keeps its 464px width, centred on a 484px panel (full width below xl) that continues its background. -->
+        <div class="art-panel flex justify-center overflow-hidden rounded-md xl:w-121">
+          <img
+            [src]="content().solution.art.src"
+            alt=""
+            [width]="content().solution.art.width"
+            [height]="content().solution.art.height"
+            loading="lazy"
+            class="w-full max-w-116"
+          />
+        </div>
+      </article>
+    </div>
+  </div>
+</div>

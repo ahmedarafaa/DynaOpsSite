@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 import { RouterLink } from '@angular/router';
 
 import { Button } from '../../../../shared/ui/button/button';
-import { IntegrationStack } from '../integration-stack/integration-stack';
+import { ErpStack } from '../../../../shared/ui/erp-stack/erp-stack';
 import type {
   IntegrationHeroContent,
   IntegrationHeroSubtitleParts,
@@ -12,7 +12,7 @@ import type {
 @Component({
   selector: 'app-integration-hero',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, Button, IntegrationStack],
+  imports: [RouterLink, Button, ErpStack],
   templateUrl: './integration-hero.html',
   host: {
     class:

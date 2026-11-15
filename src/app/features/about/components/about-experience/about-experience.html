@@ -1,0 +1,107 @@
+<div class="container-page py-8 xl:py-16">
+  <div
+    class="mx-auto flex w-full max-w-300 flex-col items-center gap-8 xl:flex-row xl:justify-between xl:gap-6"
+  >
+    <!-- The phone frame shrinks both cards to 268px tall. -->
+    <div class="flex w-full max-w-full justify-center gap-2 md:w-auto md:gap-4">
+      <!-- Areas of work: a list cropped by its card on the end and bottom edges, as in Figma. -->
+      <div
+        class="h-67 min-w-0 flex-1 overflow-hidden rounded-lg bg-surface ps-4 pt-4 md:h-89.25 md:w-69.25 md:flex-none md:ps-6 md:pt-6"
+      >
+        <div class="w-full overflow-hidden rounded-ss-lg border border-line bg-surface pb-2.5">
+          <p class="bg-canvas px-3 pt-3 pb-1.25 text-label-md font-semibold text-fg-brand">
+            {{ content().areasTitle }}
+          </p>
+          <ul class="mt-2.5 flex flex-col divide-y divide-line-subtle px-3">
+            @for (area of content().areas; track area.label) {
+              <li
+                class="flex items-center gap-2 py-1.5 text-label-sm whitespace-nowrap text-fg-brand first:pt-0"
+              >
+                <span
+                  class="flex size-6.5 shrink-0 items-center justify-center rounded-sm bg-brand-subtle"
+                >
+                  <img [src]="area.icon" alt="" width="14" height="14" class="size-3.5" />
+                </span>
+                {{ area.label }}
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+
+      <!-- Map: Figma's 180x357 window pans and zooms across one map between Saudi Arabia, the UAE and Egypt. -->
+      <div
+        aria-hidden="true"
+        class="relative h-67 w-33.75 shrink-0 overflow-hidden rounded-lg bg-surface md:h-89.25 md:w-45"
+      >
+        <!-- The phone frame scales the whole window to 75%. -->
+        <div
+          class="absolute start-0 top-0 h-89.25 w-45 max-md:origin-top-left max-md:scale-75 max-md:rtl:origin-top-right"
+        >
+          <!-- Geography reads the same in both languages. -->
+          <div dir="ltr" class="absolute inset-0">
+            <div class="map-pan absolute start-0 top-0 h-104 w-88.75">
+              @for (country of content().countries; track country.name; let i = $index) {
+                <img
+                  [src]="country.map"
+                  alt=""
+                  width="355"
+                  height="416"
+                  loading="lazy"
+                  class="map absolute inset-0 size-full"
+                  [class]="'map-' + i"
+                />
+              }
+            </div>
+          </div>
+          <!-- Figma's map pin: one tooltip that resizes to each country while its flag and name crossfade. -->
+          <div class="pin absolute inset-x-0 top-15 flex flex-col items-center">
+            <div class="tooltip flex items-center bg-surface">
+              <span class="indicator grid bg-subtle">
+                @for (country of content().countries; track country.name; let i = $index) {
+                  <img
+                    [src]="country.flag"
+                    alt=""
+                    width="22"
+                    height="16"
+                    class="fade col-start-1 row-start-1 h-4 w-5.5"
+                    [class]="'fade-' + i"
+                  />
+                }
+              </span>
+              <span #names class="names grid overflow-hidden text-label-md font-semibold">
+                @for (country of content().countries; track country.name; let i = $index) {
+                  <span
+                    class="fade col-start-1 row-start-1 justify-self-start whitespace-nowrap"
+                    [class]="'fade-' + i"
+                  >
+                    {{ country.name }}
+                  </span>
+                }
+              </span>
+            </div>
+            <img
+              [src]="content().pinArrow"
+              alt=""
+              width="18"
+              height="11"
+              class="-mt-px rotate-180"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex max-w-160 flex-col gap-4 text-center xl:max-w-124.25 xl:text-start">
+      <!-- Figma breaks the English title after "Behind"; the web font fits "the" on the first line in 497px. -->
+      <h2 class="text-h3 text-fg-brand md:text-h2 xl:text-display-md xl:ltr:max-w-112.5">
+        {{ content().title }}
+      </h2>
+      @for (paragraph of paragraphs(); track $index) {
+        <!-- One line, so no space is rendered beside the emphases (before a comma, for one). -->
+        <!-- prettier-ignore -->
+        <p class="text-body-md text-fg-secondary">@for (segment of paragraph; track $index) {@if (segment.strong) {<strong class="font-semibold">{{ segment.text }}</strong>} @else {<ng-container>{{ segment.text }}</ng-container>}}</p>
+      }
+    </div>
+  </div>
+</div>

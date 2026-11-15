@@ -54,6 +54,10 @@
   /* Accent — decorative gradients only (footer backdrop). Not a Figma variable; the design uses the raw value. */
   --accent-teal: #33c8cf;
 
+  /* ZATCA product art — the navy gradient behind its logo on the About page. Not a Figma variable either. */
+  --zatca-navy: #0c2445;
+  --zatca-blue: #1e59ab;
+
   /* Spacing — 4 px base. Tailwind's default `--spacing: 0.25rem` already
      matches this scale (p-1 = 4px … p-24 = 96px). */
   --space-2: 0.125rem;

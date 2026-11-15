@@ -1,0 +1,125 @@
+/* How open a card is, 0 to 1; registered so the keyframes can tween it and everything derived from it. */
+@property --open {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 1;
+}
+
+.mark {
+  opacity: calc(1 - var(--open));
+}
+
+.lockup {
+  opacity: var(--open);
+}
+
+/* The phone frame shrinks each 400px lockup to 194px inside a 92px banner. */
+@media (width < 48rem) {
+  .lockup {
+    zoom: 0.485;
+  }
+}
+
+/* Figma frame: 597px open, 285.5px closed (of 1200 with 16px gaps); the banner grows from 190px to the full 304px. */
+@media (width >= 80rem) {
+  /* Widths come straight from the row (a size container), so padding and borders can't skew Figma's ratio. */
+  .cards {
+    container-type: inline-size;
+  }
+
+  .product {
+    flex: none;
+    width: calc((100cqw - 2rem) * (285.5 + 311.5 * var(--open)) / 1168);
+    animation: 7.8s ease-out infinite;
+  }
+
+  .product-1,
+  .product-2 {
+    --open: 0;
+  }
+
+  /* Above the copy, so a closing banner covers the fading text instead of sitting under it. */
+  .banner {
+    z-index: 1;
+    height: calc(11.875rem + 7.125rem * (1 - var(--open)));
+  }
+
+  /* The open card's width less its 16px padding and 1px border each side, whichever card is open. */
+  .details {
+    width: calc((100cqw - 2rem) * 597 / 1168 - 2.125rem);
+    opacity: var(--open);
+  }
+
+  /* Three Smart Animate steps of 600ms, each after a 2s hold: DynaOps365, ZATCA, Restricto. */
+  .product-0 {
+    animation-name: open-first;
+  }
+
+  .product-1 {
+    animation-name: open-second;
+  }
+
+  .product-2 {
+    animation-name: open-third;
+  }
+
+  /* A clicked card takes over from the loop and opens, the others close, with the loop's own 600ms ease-out. */
+  .picked .product {
+    --open: var(--picked);
+    animation: none;
+    transition: --open 0.6s ease-out;
+  }
+}
+
+@keyframes open-first {
+  0%,
+  25.641% {
+    --open: 1;
+  }
+  33.333%,
+  92.308% {
+    --open: 0;
+  }
+  100% {
+    --open: 1;
+  }
+}
+
+@keyframes open-second {
+  0%,
+  25.641% {
+    --open: 0;
+  }
+  33.333%,
+  58.974% {
+    --open: 1;
+  }
+  66.667%,
+  100% {
+    --open: 0;
+  }
+}
+
+@keyframes open-third {
+  0%,
+  58.974% {
+    --open: 0;
+  }
+  66.667%,
+  92.308% {
+    --open: 1;
+  }
+  100% {
+    --open: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product {
+    animation: none;
+  }
+
+  .picked .product {
+    transition: none;
+  }
+}

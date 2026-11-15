@@ -1,0 +1,185 @@
+/* Figma's map variants hold 2s and Smart Animate for 1s, 9s in all: Saudi Arabia, the UAE, Egypt.
+   Each highlight fades in over the one below while the map pans; Egypt fades out to reveal Saudi Arabia. */
+.map-pan,
+.map,
+.fade,
+.names {
+  animation: 9s ease-out infinite;
+}
+
+/* The 355x416 export crops Figma's map at (1209, 435); offsets are each variant's layer position, the UAE zoomed 1.5347x. */
+.map-pan {
+  transform-origin: 0 0;
+  transform: translate(-122px, -39px) scale(1);
+  animation-name: map-pan;
+}
+
+@keyframes map-pan {
+  0%,
+  22.222% {
+    transform: translate(-122px, -39px) scale(1);
+  }
+  33.333%,
+  55.556% {
+    transform: translate(-333.6px, -192.4px) scale(1.5347);
+  }
+  66.667%,
+  88.889% {
+    transform: translate(-20px, -20.5px) scale(1);
+  }
+  100% {
+    transform: translate(-122px, -39px) scale(1);
+  }
+}
+
+.map-1,
+.map-2,
+.fade-1,
+.fade-2 {
+  opacity: 0;
+}
+
+.map-1 {
+  animation-name: map-second;
+}
+
+.map-2 {
+  animation-name: map-third;
+}
+
+.fade-0 {
+  animation-name: tip-first;
+}
+
+.fade-1 {
+  animation-name: tip-second;
+}
+
+.fade-2 {
+  animation-name: tip-third;
+}
+
+/* Figma's map pin, a component scaled to 0.828: its box values and two drop shadows are on that scale. */
+.pin {
+  filter: drop-shadow(11.59px 14.08px 33.12px rgb(112 144 176 / 0.6))
+    drop-shadow(0 8.28px 33.12px rgb(0 0 0 / 0.2));
+}
+
+.tooltip {
+  gap: 0.621rem;
+  padding: 0.3105rem 0.5175rem;
+  border-radius: 0.5175rem;
+}
+
+.indicator {
+  padding: 0.414rem;
+  border-radius: 0.3105rem;
+}
+
+/* Figma's Gray/600 text style; it has no variable in the design system. */
+.names {
+  width: var(--name-0);
+  line-height: 1.25rem;
+  color: #475467;
+  animation-name: names-width;
+}
+
+/* Each name's measured width (set by the component); the tooltip eases between them as Smart Animate resizes it. */
+@keyframes names-width {
+  0%,
+  22.222% {
+    width: var(--name-0);
+  }
+  33.333%,
+  55.556% {
+    width: var(--name-1);
+  }
+  66.667%,
+  88.889% {
+    width: var(--name-2);
+  }
+  100% {
+    width: var(--name-0);
+  }
+}
+
+@keyframes map-second {
+  0%,
+  22.222% {
+    opacity: 0;
+  }
+  33.333%,
+  66.667% {
+    opacity: 1;
+  }
+  66.668%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes map-third {
+  0%,
+  55.556% {
+    opacity: 0;
+  }
+  66.667%,
+  88.889% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes tip-first {
+  0%,
+  22.222% {
+    opacity: 1;
+  }
+  33.333%,
+  88.889% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes tip-second {
+  0%,
+  22.222% {
+    opacity: 0;
+  }
+  33.333%,
+  55.556% {
+    opacity: 1;
+  }
+  66.667%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes tip-third {
+  0%,
+  55.556% {
+    opacity: 0;
+  }
+  66.667%,
+  88.889% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-pan,
+  .map,
+  .fade,
+  .names {
+    animation: none;
+  }
+}

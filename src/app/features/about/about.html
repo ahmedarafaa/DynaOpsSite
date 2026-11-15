@@ -1,0 +1,35 @@
+<app-about-hero [content]="content.hero" />
+
+<app-about-why [content]="content.why" />
+
+<app-about-dynamics [content]="content.dynamics" />
+
+<app-about-portfolio [content]="content.portfolio" />
+
+<app-about-experience [content]="content.experience" />
+
+<ng-template appFooterCta>
+  <app-cta-container
+    [image]="content.footerCta.image.src"
+    [imageWidth]="content.footerCta.image.width"
+    [imageHeight]="content.footerCta.image.height"
+    imagePosition="bottom-end"
+    imageSize="device"
+  >
+    <!-- Figma box: 460px from xl. -->
+    <div class="flex max-w-152 flex-col gap-4 xl:max-w-115">
+      <h2 class="text-h2 md:text-h1">{{ content.footerCta.title }}</h2>
+      <p class="text-body-md">{{ content.footerCta.description }}</p>
+    </div>
+    <a
+      appButton
+      variant="secondary"
+      icon="/icons/shared/arrow-right-02.svg"
+      iconHover="/icons/shared/arrow-right-02-brand.svg"
+      directionalIcon
+      [routerLink]="content.footerCta.button.href"
+    >
+      {{ content.footerCta.button.label }}
+    </a>
+  </app-cta-container>
+</ng-template>
