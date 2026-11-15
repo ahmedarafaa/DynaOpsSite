@@ -9,9 +9,9 @@
       </div>
     </div>
 
-    <div class="rounded-xl border border-line-subtle bg-canvas p-2 md:px-5 md:py-6 xl:p-6">
-      <!-- Tablet and phone: every capability open, each above its own panel, separated by rules. -->
-      <ul class="flex flex-col gap-6 md:gap-5 xl:hidden">
+    <!-- Tablet and phone: every capability open, each above its own panel, separated by rules. -->
+    <div class="rounded-xl border border-line-subtle bg-canvas p-2 md:px-5 md:py-6 xl:hidden">
+      <ul class="flex flex-col gap-6 md:gap-5">
         @for (item of content().items; track item.title; let index = $index) {
           <li class="flex flex-col gap-2 border-b border-line pb-6 last:border-0 last:pb-0 md:pb-5">
             <div class="flex gap-3 p-3">
@@ -27,16 +27,23 @@
           </li>
         }
       </ul>
+    </div>
 
-      <!-- Desktop: choosing a capability opens its description and swaps the panel artwork. -->
-      <div class="hidden gap-6 xl:flex">
+    <!-- Desktop: the track's height is the scroll distance; the card inside stays sticky, centred in the viewport. -->
+    <div #track class="hidden xl:block" [style.height]="trackHeight()">
+      <div
+        #card
+        class="flex gap-6 rounded-xl border border-line-subtle bg-canvas p-6"
+        [class.sticky]="scrollMode()"
+        [style.top.px]="scrollMode() ? stickyTop() : null"
+      >
         <ul class="flex w-141 shrink-0 flex-col gap-2">
           @for (item of content().items; track item.title; let index = $index) {
             <li class="flex flex-col gap-2 border-b border-line pb-2 last:border-0 last:pb-0">
               <button
                 type="button"
                 class="flex w-full gap-3 rounded-md p-3 text-start"
-                [class.cursor-pointer]="active() != index"
+                [class.cursor-pointer]="active() !== index"
                 [attr.aria-expanded]="active() === index"
                 (click)="select(index)"
               >
