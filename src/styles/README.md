@@ -88,5 +88,8 @@ width/height attributes are only Figma's default export size.
 - `text-h2-sm` (24px SemiBold, 30px leading in both languages) has no Figma text style: phone frames
   set section titles at 24px by hand. Used for the feature connections title on phones; add the
   style to the design-system file if it spreads.
+- `rounded-badge` (8), `rounded-cover` (19.33) and `rounded-cover-lg` (29) have no Figma radius
+  variable: the Blog frames set them by hand on the "New" badge, the post card covers and the
+  featured cover. Add them to the design-system file if they spread.
 - The typography frames are labelled "Inter" and "Cairo", but every text style in the file
   uses Montserrat and IBM Plex Sans Arabic. The code follows the styles.

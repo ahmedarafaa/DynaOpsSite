@@ -1,0 +1,26 @@
+{
+  "locale": "ar",
+  "translations": {
+    "blog.title": "المدونة: المبيعات الميدانية وDynamics 365 F&O",
+    "blog.description": "أدلة عملية حول المبيعات الميدانية وتراخيص Dynamics 365 F&O وتكامل أنظمة ERP يكتبها فريق DynaOps لقادة المبيعات والعمليات في الشركات الموزعة.",
+    "blog.imageDir": "/images/blog-ar",
+    "blog.hero.title": "رؤى لفرق المبيعات الميدانية وDynamics 365 F&O",
+    "blog.hero.description": "أفكار عملية حول التنفيذ الميداني والتكامل مع نظام ERP وإدارة المبيعات من الفريق الذي يبني DynaOps.",
+    "blog.hero.new": "جديد",
+    "blog.readTime": "قراءة {$minutes} دقائق",
+    "blog.post.license-enforcement.title": "تطبيق ترخيص مايكروسوفت 2025",
+    "blog.post.license-enforcement.excerpt": "تطبيق ترخيص مايكروسوفت 2025 D365FO: تعرّف على تطبيق الترخيص المعاد تصميمه بدءًا من التحذيرات داخل التطبيق في 1 سبتمبر 2025 وحظر الوصول الصارم ابتداءً من 1 نوفمبر 2025.",
+    "blog.author.ahmed-arafa.name": "أحمد عرفة",
+    "blog.author.ahmed-arafa.role": "الرئيس التنفيذي لشركة DynaSystems",
+    "blog.posts.loadMore": "عرض المزيد",
+    "blog.post.compliance-handbook.title": "الدليل النهائي للامتثال لترخيص Dynamics 365 (إصدار 2025)",
+    "blog.post.compliance-handbook.excerpt": "يشرح هذا الدليل تطبيق مايكروسوفت الجديد لترخيص Dynamics 365 والموعد النهائي الحاسم.",
+    "blog.post.license-validation.title": "دليلك خطوة بخطوة للتحقق من تراخيص مستخدمي Dynamics 365",
+    "blog.post.license-validation.excerpt": "يحدث تحول كبير في العمليات للشركات التي تستخدم Dynamics 365، مع بدء مايكروسوفت في فرض التحقق من تراخيص المستخدمين.",
+    "blog.post.grace-period.title": "ماذا يحدث عند انتهاء فترة السماح لـ D365؟",
+    "blog.post.grace-period.excerpt": "يشرح هذا الدليل فترة السماح لترخيص Dynamics 365 وعواقب عدم اتخاذ إجراء.",
+    "blog.cta.title": "شاهد DynaOps أثناء العمل",
+    "blog.cta.description": "اكتشف كيف يربط DynaOps عمليات مبيعاتك الميدانية مع Microsoft Dynamics 365 Finance & Operations",
+    "blog.cta.button": "احجز عرضًا تجريبيًا"
+  }
+}

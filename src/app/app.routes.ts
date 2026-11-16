@@ -28,6 +28,7 @@ import { PHARMACEUTICALS_SEO } from './features/industries/pharmaceuticals/pharm
 import { RETAIL_DISTRIBUTION_SEO } from './features/industries/retail-distribution/retail-distribution-seo';
 import { WHOLESALE_DISTRIBUTION_SEO } from './features/industries/wholesale-distribution/wholesale-distribution-seo';
 import { ABOUT_SEO } from './features/about/about-seo';
+import { BLOG_SEO } from './features/blog/blog-seo';
 import { INTEGRATION_SEO } from './features/integration/integration-seo';
 import { NOT_FOUND_CONTENT } from './features/not-found/not-found-content';
 
@@ -258,6 +259,12 @@ export const routes: Routes = [
     loadComponent: () => import('./features/about/about').then((m) => m.About),
     title: ABOUT_SEO.title,
     data: { seo: { description: ABOUT_SEO.description } satisfies RouteSeo },
+  },
+  {
+    path: 'blog',
+    loadComponent: () => import('./features/blog/blog').then((m) => m.Blog),
+    title: BLOG_SEO.title,
+    data: { seo: { description: BLOG_SEO.description } satisfies RouteSeo },
   },
   // Static copy of NotFound for FTP hosting; the server rules in public/ serve it as the 404 page.
   {

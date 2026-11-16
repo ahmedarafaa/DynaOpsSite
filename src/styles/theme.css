@@ -134,6 +134,10 @@
   --radius-md: 0.625rem; /* 10 */
   --radius-lg: 1rem; /* 16 */
   --radius-xl: 1.5rem; /* 24 */
+  /* Raw Figma radii with no variable: blog badge, card cover and featured cover. */
+  --radius-badge: 0.5rem; /* 8 */
+  --radius-cover: 1.2083rem; /* 19.33 */
+  --radius-cover-lg: 1.8125rem; /* 29 */
 
   /* ---- Elevation (shadow-*) -------------------------------------------- */
   --shadow-*: initial;

@@ -112,6 +112,7 @@
               "src/locale/ar/features.json",
               "src/locale/ar/integration.json",
               "src/locale/ar/about.json",
+              "src/locale/ar/blog.json",
               "src/locale/ar/not-found.json"
             ],
             "subPath": "ar"

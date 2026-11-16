@@ -32,5 +32,6 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'features', renderMode: RenderMode.Prerender },
   { path: 'integration', renderMode: RenderMode.Prerender },
   { path: 'about', renderMode: RenderMode.Prerender },
+  { path: 'blog', renderMode: RenderMode.Prerender },
   { path: '**', renderMode: RenderMode.Server },
 ];
