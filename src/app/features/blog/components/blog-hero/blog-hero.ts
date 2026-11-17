@@ -2,6 +2,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { BLOG_TITLE_HOVER } from '../blog-post-card/blog-title-hover';
 import { BlogPostMeta } from '../blog-post-meta/blog-post-meta';
 import type { BlogHeroContent } from './blog-hero.model';
 
@@ -18,4 +19,6 @@ import type { BlogHeroContent } from './blog-hero.model';
 })
 export class BlogHero {
   readonly content = input.required<BlogHeroContent>();
+
+  protected readonly titleHover = BLOG_TITLE_HOVER;
 }

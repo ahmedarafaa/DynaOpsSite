@@ -1,0 +1,26 @@
+@let c = content();
+
+<div class="container-page py-8 xl:py-16">
+  <!-- Figma box: 838px. -->
+  <div class="mx-auto flex w-full max-w-209.5 flex-col gap-8 md:gap-16">
+    <img
+      [ngSrc]="c.cover.src"
+      alt=""
+      width="838"
+      height="300"
+      priority
+      class="w-full rounded-cover-lg object-cover md:h-75"
+    />
+    <div class="flex flex-col items-center gap-4 text-center">
+      <h1 class="text-h2 md:text-h1 xl:text-display-md">{{ c.title }}</h1>
+      <p class="text-body-md text-fg-secondary">{{ c.description }}</p>
+      <p class="flex flex-wrap items-center justify-center gap-3 text-label-md text-fg-secondary">
+        <span>{{ c.author }}</span>
+        <span aria-hidden="true" class="h-3.25 w-px bg-line-strong"></span>
+        <time [attr.datetime]="c.date">{{ c.date | date: 'longDate' }}</time>
+        <span aria-hidden="true" class="h-3.25 w-px bg-line-strong"></span>
+        <span>{{ readTime() }}</span>
+      </p>
+    </div>
+  </div>
+</div>

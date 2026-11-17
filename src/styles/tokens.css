@@ -54,6 +54,9 @@
   /* Accent — decorative gradients only (footer backdrop). Not a Figma variable; the design uses the raw value. */
   --accent-teal: #33c8cf;
 
+  /* Table ink — text and rules of article tables (Blog). Not a Figma variable; the design uses the raw value. */
+  --table-ink: #303a4d;
+
   /* ZATCA product art — the navy gradient behind its logo on the About page. Not a Figma variable either. */
   --zatca-navy: #0c2445;
   --zatca-blue: #1e59ab;

@@ -29,6 +29,7 @@ import { RETAIL_DISTRIBUTION_SEO } from './features/industries/retail-distributi
 import { WHOLESALE_DISTRIBUTION_SEO } from './features/industries/wholesale-distribution/wholesale-distribution-seo';
 import { ABOUT_SEO } from './features/about/about-seo';
 import { BLOG_SEO } from './features/blog/blog-seo';
+import { LICENSE_ENFORCEMENT_2025_SEO } from './features/blog/microsoft-license-enforcement-2025/microsoft-license-enforcement-2025-seo';
 import { INTEGRATION_SEO } from './features/integration/integration-seo';
 import { NOT_FOUND_CONTENT } from './features/not-found/not-found-content';
 
@@ -265,6 +266,15 @@ export const routes: Routes = [
     loadComponent: () => import('./features/blog/blog').then((m) => m.Blog),
     title: BLOG_SEO.title,
     data: { seo: { description: BLOG_SEO.description } satisfies RouteSeo },
+  },
+  {
+    path: 'blog/microsoft-license-enforcement-2025',
+    loadComponent: () =>
+      import('./features/blog/microsoft-license-enforcement-2025/microsoft-license-enforcement-2025').then(
+        (m) => m.MicrosoftLicenseEnforcement2025,
+      ),
+    title: LICENSE_ENFORCEMENT_2025_SEO.title,
+    data: { seo: { description: LICENSE_ENFORCEMENT_2025_SEO.description } satisfies RouteSeo },
   },
   // Static copy of NotFound for FTP hosting; the server rules in public/ serve it as the 404 page.
   {

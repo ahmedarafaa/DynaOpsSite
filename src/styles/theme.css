@@ -43,6 +43,8 @@
 
   /* Accent: bg-accent, to-accent/20 … (decorative only) */
   --color-accent: var(--accent-teal);
+  /* Article tables: text-table-ink, border-table-ink */
+  --color-table-ink: var(--table-ink);
 
   /* Product art: from-zatca-navy to-zatca-blue (ZATCA card only) */
   --color-zatca-navy: var(--zatca-navy);

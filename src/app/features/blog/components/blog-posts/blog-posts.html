@@ -3,34 +3,7 @@
     <!-- One column of cards; rows with the cover beside the copy on tablet; three columns from xl. -->
     <ul class="grid w-full gap-8 xl:grid-cols-3">
       @for (post of visiblePosts(); track post.title) {
-        <li>
-          <article class="relative flex flex-col gap-6 md:max-xl:flex-row">
-            <img
-              [src]="post.image.src"
-              alt=""
-              [attr.width]="post.image.width"
-              [attr.height]="post.image.height"
-              loading="lazy"
-              class="h-50 w-full rounded-cover border border-line object-cover md:max-xl:w-auto md:max-xl:min-w-0 md:max-xl:flex-1"
-            />
-            <div class="flex flex-col gap-4 md:max-xl:flex-1">
-              <app-blog-post-meta [date]="post.date" [readMinutes]="post.readMinutes" />
-              <div class="flex flex-col gap-2">
-                <h2 class="text-h4">
-                  @if (post.href; as href) {
-                    <!-- The stretched link makes the whole card clickable. -->
-                    <a [routerLink]="href" class="after:absolute after:inset-0">{{ post.title }}</a>
-                  } @else {
-                    {{ post.title }}
-                  }
-                </h2>
-                <p class="line-clamp-2 text-body-sm md:max-xl:line-clamp-3 text-fg-secondary">
-                  {{ post.excerpt }}
-                </p>
-              </div>
-            </div>
-          </article>
-        </li>
+        <li><app-blog-post-card [post]="post" /></li>
       }
     </ul>
 

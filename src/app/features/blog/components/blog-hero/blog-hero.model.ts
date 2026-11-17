@@ -1,4 +1,4 @@
-import type { BlogPost } from '../blog-posts/blog-posts.model';
+import type { BlogPost } from '../blog-post-card/blog-post-card.model';
 
 export interface BlogAuthor {
   name: string;

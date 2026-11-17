@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 import type { BlogPostMetaSize } from './blog-post-meta.model';
+import { blogReadTime } from './blog-read-time';
 
 // Publish date and reading time of a post; the featured post adds its "New" badge through the slot.
 @Component({
@@ -40,9 +41,7 @@ export class BlogPostMeta {
   readonly readMinutes = input.required<number>();
   readonly size = input<BlogPostMetaSize>('sm');
 
-  protected readonly readTime = computed(
-    () => $localize`:@@blog.readTime:${this.readMinutes()}:minutes: min read`,
-  );
+  protected readonly readTime = computed(() => blogReadTime(this.readMinutes()));
   protected readonly labelClass = computed(() =>
     this.size() === 'md' ? 'text-label-md' : 'text-label-sm',
   );

@@ -1,15 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
 
 import { Button } from '../../../../shared/ui/button/button';
-import { BlogPostMeta } from '../blog-post-meta/blog-post-meta';
+import { BlogPostCard } from '../blog-post-card/blog-post-card';
 import type { BlogPostsContent } from './blog-posts.model';
 
 // Grid of the latest posts below the featured one, revealed a page at a time.
 @Component({
   selector: 'app-blog-posts',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, Button, BlogPostMeta],
+  imports: [Button, BlogPostCard],
   templateUrl: './blog-posts.html',
   host: { class: 'block' },
 })

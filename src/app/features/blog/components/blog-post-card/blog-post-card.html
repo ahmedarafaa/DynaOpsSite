@@ -1,0 +1,49 @@
+@let p = post();
+
+<!-- Figma hover (300ms ease-out): a cover logo grows 16% and the title is underlined. -->
+<article class="group relative flex flex-col gap-6 md:max-xl:flex-row">
+  <div
+    class="relative h-50 w-full overflow-hidden rounded-cover border border-line md:max-xl:w-auto md:max-xl:min-w-0 md:max-xl:flex-1"
+  >
+    <img
+      [src]="p.image.src"
+      alt=""
+      [attr.width]="p.image.width"
+      [attr.height]="p.image.height"
+      loading="lazy"
+      class="size-full object-cover"
+    />
+    @if (p.image.logo; as logo) {
+      <img
+        [src]="logo.src"
+        alt=""
+        [attr.width]="logo.width"
+        [attr.height]="logo.height"
+        loading="lazy"
+        class="absolute inset-0 m-auto w-3/5 max-w-60 transition-transform duration-300 ease-out group-hover:scale-116 motion-reduce:transition-none"
+      />
+    }
+  </div>
+  <div class="flex flex-col gap-4 md:max-xl:flex-1">
+    <app-blog-post-meta [date]="p.date" [readMinutes]="p.readMinutes" />
+    <div class="flex flex-col gap-2">
+      @if (headingLevel() === 3) {
+        <h3 class="text-h4" [class]="titleHover"><ng-container [ngTemplateOutlet]="title" /></h3>
+      } @else {
+        <h2 class="text-h4" [class]="titleHover"><ng-container [ngTemplateOutlet]="title" /></h2>
+      }
+      <p class="line-clamp-2 text-body-sm text-fg-secondary md:max-xl:line-clamp-3">
+        {{ p.excerpt }}
+      </p>
+    </div>
+  </div>
+</article>
+
+<ng-template #title>
+  @if (p.href; as href) {
+    <!-- The stretched link makes the whole card clickable. -->
+    <a [routerLink]="href" class="after:absolute after:inset-0">{{ p.title }}</a>
+  } @else {
+    {{ p.title }}
+  }
+</ng-template>

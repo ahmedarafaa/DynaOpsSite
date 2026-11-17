@@ -2,7 +2,7 @@ import { CUSTOMER_MANAGEMENT_CONTENT } from '../features/customer-management/cus
 import type { BlogContent } from './blog.model';
 
 // Copy is English here; src/locale/ar/blog.json carries the Arabic under the same ids.
-// The featured cover mirrors its logos in Arabic, so its folder is localized like the copy.
+// The featured cover mirrors its logos in Arabic, so their folder is localized like the copy.
 const dir = '/images/blog';
 const localizedDir = $localize`:@@blog.imageDir:/images/blog`;
 
@@ -16,7 +16,13 @@ export const BLOG_CONTENT: BlogContent = {
       excerpt: $localize`:@@blog.post.license-enforcement.excerpt:Microsoft License Enforcement 2025 D365FO: Learn about the revamped licensing enforcement starting with in-app warnings on September 1, 2025 and strict access blocks beginning November 1, 2025.`,
       date: '2026-10-17',
       readMinutes: 8,
-      image: { src: `${localizedDir}/license-enforcement-2025.webp`, width: 1130, height: 600 },
+      image: {
+        src: `${dir}/license-enforcement-2025-bg.webp`,
+        width: 1130,
+        height: 600,
+        logo: { src: `${localizedDir}/logos-microsoft-dynamics.svg`, width: 441, height: 65 },
+      },
+      href: '/blog/microsoft-license-enforcement-2025',
       isNew: true,
       author: {
         name: $localize`:@@blog.author.ahmed-arafa.name:Ahmed Arafa`,
@@ -34,7 +40,12 @@ export const BLOG_CONTENT: BlogContent = {
         excerpt: $localize`:@@blog.post.compliance-handbook.excerpt:This handbook explains Microsoft’s new Dynamics 365 license enforcement and the critical deadline.`,
         date: '2026-10-10',
         readMinutes: 8,
-        image: { src: `${dir}/license-compliance-handbook.webp`, width: 758, height: 400 },
+        image: {
+          src: `${dir}/license-compliance-handbook-bg.webp`,
+          width: 758,
+          height: 400,
+          logo: { src: `${dir}/logo-dynaops365.svg`, width: 241, height: 64 },
+        },
       },
       {
         title: $localize`:@@blog.post.license-validation.title:Your Step-by-Step Guide to Dynamics 365 User License Validation`,

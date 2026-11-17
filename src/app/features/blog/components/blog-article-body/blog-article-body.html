@@ -1,0 +1,67 @@
+<!-- Figma column: 750px. -->
+<div class="container-page">
+  <div class="mx-auto flex w-full max-w-187.5 flex-col gap-12">
+    @for (section of sections(); track $index) {
+      <section class="flex flex-col gap-6">
+        @if (section.title; as title) {
+          <h2 class="text-h2 md:text-h1">{{ title }}</h2>
+        }
+        @for (block of section.blocks; track $index) {
+          @switch (block.kind) {
+            @case ('paragraph') {
+              <!-- prettier-ignore -->
+              <p class="text-body-md text-fg-secondary"><ng-container [ngTemplateOutlet]="runs" [ngTemplateOutletContext]="{ $implicit: block.content }" /></p>
+            }
+            @case ('list') {
+              <ul class="flex list-disc flex-col gap-5.5 ps-6 text-body-md text-fg-secondary">
+                @for (item of block.items; track $index) {
+                  <li>{{ item }}</li>
+                }
+              </ul>
+            }
+            @case ('quote') {
+              <blockquote class="border-s-4 border-line-subtle p-6">
+                <!-- Figma box: 496px. -->
+                <p class="max-w-124 text-h4 text-fg-secondary">
+                  <strong class="text-fg">{{ block.label }}</strong> {{ block.text }}
+                </p>
+              </blockquote>
+            }
+            @case ('table') {
+              <!-- Scrolls sideways on phones instead of squeezing the three columns. -->
+              <div class="overflow-x-auto">
+                <table
+                  class="w-full min-w-150 table-fixed border-collapse text-h4 font-medium text-table-ink"
+                >
+                  <thead>
+                    <tr>
+                      @for (cell of block.head; track $index) {
+                        <th class="border border-table-ink p-2.5 font-semibold">{{ cell }}</th>
+                      }
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (row of block.rows; track $index) {
+                      <tr>
+                        @for (cell of row; track $index) {
+                          <!-- prettier-ignore -->
+                          <td class="border border-table-ink p-2.5 text-start"><ng-container [ngTemplateOutlet]="runs" [ngTemplateOutletContext]="{ $implicit: cell }" /></td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+          }
+        }
+      </section>
+    }
+  </div>
+</div>
+
+<!-- Inline runs on one line, so no space is rendered between them. -->
+<ng-template #runs let-runs>
+  <!-- prettier-ignore -->
+  @for (run of runs; track $index) {@switch (kind(run)) {@case ('strong') {<strong class="font-semibold">{{ text(run) }}</strong>}@case ('muted') {<span class="text-fg-tertiary">{{ text(run) }}</span>}@default {<ng-container>{{ text(run) }}</ng-container>}}}
+</ng-template>

@@ -13,15 +13,31 @@
     </div>
 
     <!-- Stacked below xl with a 300px-high cover on tablet; from xl the 565px cover sits beside the copy. -->
-    <article class="relative flex flex-col gap-6 md:gap-12 xl:flex-row xl:items-center">
-      <img
-        [ngSrc]="post.image.src"
-        alt=""
-        width="565"
-        height="300"
-        priority
-        class="w-full rounded-cover-lg object-cover md:h-75 xl:w-141.25 xl:shrink-0"
-      />
+    <!-- Figma hover (300ms ease-out): the logos grow 9%, a 10% black tint fades in, the title is underlined. -->
+    <article class="group relative flex flex-col gap-6 md:gap-12 xl:flex-row xl:items-center">
+      <div class="relative w-full overflow-hidden rounded-cover-lg md:h-75 xl:w-141.25 xl:shrink-0">
+        <img
+          [ngSrc]="post.image.src"
+          alt=""
+          width="565"
+          height="300"
+          priority
+          class="w-full object-cover md:h-full"
+        />
+        <span
+          aria-hidden="true"
+          class="absolute inset-0 bg-neutral-950/10 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 motion-reduce:transition-none"
+        ></span>
+        @if (post.image.logo; as logo) {
+          <img
+            [src]="logo.src"
+            alt=""
+            [attr.width]="logo.width"
+            [attr.height]="logo.height"
+            class="absolute inset-0 m-auto w-4/5 max-w-110 transition-transform duration-300 ease-out group-hover:scale-109 motion-reduce:transition-none"
+          />
+        }
+      </div>
       <div class="flex flex-1 flex-col gap-4">
         <app-blog-post-meta size="md" [date]="post.date" [readMinutes]="post.readMinutes">
           @if (post.isNew) {
@@ -31,7 +47,7 @@
           }
         </app-blog-post-meta>
         <div class="flex flex-col gap-2">
-          <h2 class="text-h3 md:text-h2">
+          <h2 class="text-h3 md:text-h2" [class]="titleHover">
             @if (post.href; as href) {
               <!-- The stretched link makes the whole post clickable. -->
               <a [routerLink]="href" class="after:absolute after:inset-0">{{ post.title }}</a>
