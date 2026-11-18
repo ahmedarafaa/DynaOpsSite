@@ -30,13 +30,20 @@ import { WHOLESALE_DISTRIBUTION_SEO } from './features/industries/wholesale-dist
 import { ABOUT_SEO } from './features/about/about-seo';
 import { BLOG_SEO } from './features/blog/blog-seo';
 import { LICENSE_ENFORCEMENT_2025_SEO } from './features/blog/microsoft-license-enforcement-2025/microsoft-license-enforcement-2025-seo';
+import { HOME_SEO } from './features/home/home-seo';
 import { INTEGRATION_SEO } from './features/integration/integration-seo';
 import { NOT_FOUND_CONTENT } from './features/not-found/not-found-content';
 
 // Pages are registered once; each language build serves them under its own base href.
 // Every public page also needs a Prerender entry in app.routes.server.ts.
 export const routes: Routes = [
-  { path: '', redirectTo: 'industries/fmcg', pathMatch: 'full' },
+  {
+    path: '',
+    pathMatch: 'full',
+    loadComponent: () => import('./features/home/home').then((m) => m.Home),
+    title: HOME_SEO.title,
+    data: { seo: { description: HOME_SEO.description } satisfies RouteSeo },
+  },
   {
     path: 'industries/fmcg',
     loadComponent: () => import('./features/industries/fmcg/fmcg').then((m) => m.Fmcg),

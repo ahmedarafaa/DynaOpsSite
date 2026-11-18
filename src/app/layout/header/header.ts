@@ -30,6 +30,7 @@ type ViewTransitionDocument = Document & { startViewTransition?: (update: () => 
     class: 'sticky top-0 z-40 block',
     '(document:keydown.escape)': 'closeAll()',
     '(document:click)': 'onDocumentClick($event)',
+    '(window:scroll)': 'onScroll()',
   },
 })
 export class Header {
@@ -52,6 +53,17 @@ export class Header {
 
   protected readonly menuOpen = signal(false);
   protected readonly expanded = signal<string | null>(null);
+
+  // Fully transparent at the top of the page; the blurred white tint appears once content scrolls under it.
+  protected readonly scrolled = signal(false);
+
+  constructor() {
+    afterNextRender(() => this.onScroll());
+  }
+
+  protected onScroll(): void {
+    this.scrolled.set(window.scrollY > 0);
+  }
 
   protected openMenu(): void {
     this.menuOpen.set(true);

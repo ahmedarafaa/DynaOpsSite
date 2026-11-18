@@ -1,0 +1,106 @@
+<div class="container-page">
+  <div class="mx-auto flex max-w-300 items-center gap-6">
+    <app-home-heading
+      class="flex-1 items-center text-center md:items-start md:text-start"
+      [content]="content().heading"
+    />
+    <div class="hidden gap-4 md:flex">
+      <button
+        type="button"
+        class="flex size-12 cursor-pointer items-center justify-center rounded-full border border-line bg-surface shadow-sm disabled:cursor-default"
+        [disabled]="atStart()"
+        [attr.aria-label]="content().previous"
+        (click)="scroll(-1)"
+      >
+        <img
+          [src]="
+            atStart()
+              ? '/icons/landing-page/arrow-left-02-1-tertiary.svg'
+              : '/icons/landing-page/arrow-left-02-1-brand.svg'
+          "
+          alt=""
+          width="24"
+          height="24"
+          class="size-6 rtl:-scale-x-100"
+        />
+      </button>
+      <button
+        type="button"
+        class="flex size-12 cursor-pointer items-center justify-center rounded-full border border-line bg-surface shadow-sm disabled:cursor-default"
+        [disabled]="atEnd()"
+        [attr.aria-label]="content().next"
+        (click)="scroll(1)"
+      >
+        <img
+          [src]="
+            atEnd()
+              ? '/icons/landing-page/arrow-right-02-1-tertiary.svg'
+              : '/icons/landing-page/arrow-right-02-1-brand.svg'
+          "
+          alt=""
+          width="24"
+          height="24"
+          class="size-6 rtl:-scale-x-100"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Phones stack the cards; from tablet up they scroll sideways (padding in home-industries.css). -->
+<!-- The 8px block padding keeps card shadows unclipped and completes Figma's 64px gap under the heading. -->
+<ul
+  #track
+  role="list"
+  class="industries-track mt-8 flex flex-col gap-6 px-4 md:mt-14 md:snap-x md:snap-mandatory md:flex-row md:overflow-x-auto md:py-2"
+  [class.is-dragging]="dragging()"
+  (scroll)="update()"
+  (pointerdown)="onPointerDown($event)"
+  (pointermove)="onPointerMove($event)"
+  (pointerup)="onPointerUp($event)"
+  (pointercancel)="onPointerUp($event)"
+  (dragstart)="$event.preventDefault()"
+>
+  @for (item of content().items; track item.href) {
+    <li class="md:w-83 md:shrink-0 md:snap-start">
+      <a
+        class="flex h-90.5 flex-col gap-2 rounded-lg border border-line-subtle bg-surface p-2 shadow-sm transition-shadow hover:shadow-md"
+        [routerLink]="item.href"
+      >
+        <span class="flex flex-col gap-2 p-2">
+          <span class="text-h3">{{ item.title }}</span>
+          <span class="text-body-md text-fg-secondary">{{ item.description }}</span>
+        </span>
+        <span
+          class="relative flex flex-1 items-center justify-center overflow-hidden rounded-md bg-linear-to-b/srgb from-brand-500/20 to-transparent pb-5"
+        >
+          <img
+            src="/images/home/industries/grid-columns.svg"
+            alt=""
+            width="433"
+            height="409"
+            class="absolute max-w-none"
+          />
+          <img
+            src="/images/home/industries/grid-rows.svg"
+            alt=""
+            width="433"
+            height="474"
+            class="absolute max-w-none rotate-90"
+          />
+          <img
+            [src]="item.art.src"
+            alt=""
+            [width]="item.art.width"
+            [height]="item.art.height"
+            loading="lazy"
+            class="relative"
+          />
+          <span
+            class="absolute inset-0 bg-linear-to-b/srgb from-transparent from-80% to-surface"
+          ></span>
+        </span>
+      </a>
+    </li>
+  }
+</ul>

@@ -1,0 +1,10 @@
+/* First paint matches the start of the Figma timeline; reduced motion keeps the finished scene and never animates. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-map-layer[data-reveal] {
+    opacity: 0;
+  }
+
+  .hero-map-route {
+    visibility: hidden;
+  }
+}

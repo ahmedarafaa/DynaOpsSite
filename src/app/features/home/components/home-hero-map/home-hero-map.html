@@ -1,0 +1,53 @@
+<!-- 1440x637 Figma stage; every layer sits at its render bounds, so the scene scales as one image. -->
+<div class="hero-map relative aspect-1440/637 overflow-hidden" role="img" [attr.aria-label]="alt()">
+  @for (layer of back; track layer.file) {
+    <img
+      #layer
+      [ngSrc]="src(layer)"
+      alt=""
+      [width]="layer.width"
+      [height]="layer.height"
+      priority
+      class="hero-map-layer absolute h-auto"
+      [attr.data-reveal]="layer.reveal ? '' : null"
+      [style.left.%]="(layer.x / 1440) * 100"
+      [style.top.%]="(layer.y / 637) * 100"
+      [style.width.%]="(layer.w / 1440) * 100"
+    />
+  }
+
+  <!-- Route (Figma "Vector 9"), inline so its stroke can draw; viewBox origin is the path's render bounds. -->
+  <svg
+    viewBox="0 0 982 420"
+    fill="none"
+    aria-hidden="true"
+    class="absolute h-auto text-success"
+    [style.left.%]="(228.5 / 1440) * 100"
+    [style.top.%]="(138.1 / 637) * 100"
+    [style.width.%]="(982 / 1440) * 100"
+  >
+    <path
+      #route
+      class="hero-map-route"
+      d="M1.53125 4.39062L283.605 153.367C292.1 157.853 292.142 170.006 283.678 174.55L25.5387 313.148C17.044 317.709 17.1247 329.919 25.679 334.367L174.363 411.683C186.049 417.76 199.978 417.694 211.607 411.507L979.531 2.89062"
+      pathLength="1"
+      stroke="currentColor"
+      stroke-width="6.55"
+    />
+  </svg>
+
+  @for (layer of front; track $index) {
+    <img
+      #layer
+      [src]="src(layer)"
+      alt=""
+      [width]="layer.width"
+      [height]="layer.height"
+      class="hero-map-layer absolute h-auto"
+      [attr.data-reveal]="layer.reveal ? '' : null"
+      [style.left.%]="(layer.x / 1440) * 100"
+      [style.top.%]="(layer.y / 637) * 100"
+      [style.width.%]="(layer.w / 1440) * 100"
+    />
+  }
+</div>

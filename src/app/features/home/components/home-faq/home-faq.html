@@ -1,0 +1,86 @@
+<!-- Phones run the gradient box edge to edge; from tablet it sits inside the page gutters. -->
+<div class="container-page max-md:px-0">
+  <div
+    class="mx-auto flex max-w-300 flex-col items-center gap-8 bg-linear-to-t/srgb from-brand-500/30 to-transparent p-4 md:gap-16 md:rounded-xl md:px-12 md:py-12 xl:px-30"
+  >
+    <app-home-heading class="items-center text-center" [content]="content().heading" />
+
+    <div class="flex w-full flex-col items-center gap-6">
+      <div
+        role="tablist"
+        class="flex gap-2 rounded-md bg-surface px-4 py-2 shadow-xs"
+        [attr.aria-label]="content().categoriesLabel"
+      >
+        @for (cat of content().categories; track cat.id) {
+          <button
+            type="button"
+            role="tab"
+            class="cursor-pointer rounded-md px-4 py-2 text-label-md transition-colors duration-300"
+            [class]="cat.id === category().id ? 'bg-brand text-fg-inverse' : 'hover:bg-canvas'"
+            [attr.aria-selected]="cat.id === category().id"
+            aria-controls="home-faq-panel"
+            (click)="selectCategory(cat.id)"
+          >
+            {{ cat.label }}
+          </button>
+        }
+      </div>
+
+      <div
+        #panel
+        id="home-faq-panel"
+        role="tabpanel"
+        class="flex w-full flex-col gap-1 rounded-xl bg-surface p-2 md:gap-3 md:p-8 xl:p-16"
+      >
+        @for (item of category().items; track item.question; let i = $index) {
+          @if (i > 0) {
+            <hr class="border-line-subtle" />
+          }
+          <div
+            class="relative rounded-md p-4 transition-colors duration-300"
+            [class]="open() === item.question ? '' : 'hover:bg-canvas'"
+          >
+            <h3>
+              <!-- Closed rows stretch the button over the whole row, so any click inside opens it. -->
+              <button
+                type="button"
+                class="flex w-full cursor-pointer items-center gap-4 text-start text-h4 transition-colors"
+                [class]="
+                  open() === item.question
+                    ? 'text-fg-brand'
+                    : 'font-medium before:absolute before:inset-0 before:rounded-md'
+                "
+                [attr.aria-expanded]="open() === item.question"
+                [attr.aria-controls]="'home-faq-' + i"
+                (click)="toggle(item.question)"
+              >
+                <span class="flex-1">{{ item.question }}</span>
+                <img
+                  [src]="
+                    open() === item.question
+                      ? '/icons/landing-page/remove-01-brand.svg'
+                      : '/icons/landing-page/add-01-tertiary.svg'
+                  "
+                  alt=""
+                  width="20"
+                  height="20"
+                  class="size-5 shrink-0"
+                />
+              </button>
+            </h3>
+            <div
+              class="reveal"
+              [id]="'home-faq-' + i"
+              [class.reveal-open]="open() === item.question"
+              [attr.inert]="open() === item.question ? null : ''"
+            >
+              <div>
+                <p class="pt-4 text-body-md text-fg-secondary">{{ item.answer }}</p>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

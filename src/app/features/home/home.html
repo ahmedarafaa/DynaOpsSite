@@ -1,0 +1,37 @@
+<app-home-hero [content]="content.hero" />
+
+<app-home-stats [content]="content.stats" />
+
+<app-home-features [content]="content.features" />
+
+<app-home-integration [content]="content.integration" />
+
+<app-home-industries [content]="content.industries" />
+
+<app-home-faq [content]="content.faq" />
+
+<ng-template appFooterCta>
+  <app-cta-container
+    [image]="content.footerCta.image.src"
+    [imageWidth]="content.footerCta.image.width"
+    [imageHeight]="content.footerCta.image.height"
+    imagePosition="center-end"
+    imageSize="device"
+  >
+    <!-- Figma box: 432px from xl. -->
+    <div class="flex max-w-152 flex-col gap-4 xl:max-w-108">
+      <h2 class="text-h2 md:text-h1">{{ content.footerCta.title }}</h2>
+      <p class="text-body-md">{{ content.footerCta.description }}</p>
+    </div>
+    <a
+      appButton
+      variant="secondary"
+      icon="/icons/shared/arrow-right-02.svg"
+      iconHover="/icons/shared/arrow-right-02-brand.svg"
+      directionalIcon
+      [routerLink]="content.footerCta.button.href"
+    >
+      {{ content.footerCta.button.label }}
+    </a>
+  </app-cta-container>
+</ng-template>

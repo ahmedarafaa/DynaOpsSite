@@ -1,0 +1,27 @@
+/* From tablet up the track runs to the viewport edges while its first card lines up with the 1200px content box. */
+@media (width >= 48rem) {
+  .industries-track {
+    --inset: max(2rem, calc((100% - 75rem) / 2));
+    padding-inline: var(--inset);
+    scroll-padding-inline: var(--inset);
+    scrollbar-width: none;
+  }
+}
+
+/* Snapping would fight the mouse while dragging and during the glide to the nearest card. */
+.industries-track.is-dragging,
+.industries-track.is-settling {
+  scroll-snap-type: none;
+}
+
+.industries-track.is-dragging,
+.industries-track.is-dragging * {
+  cursor: grabbing;
+  user-select: none;
+}
+
+@media (width >= 80rem) {
+  .industries-track {
+    --inset: max(clamp(1rem, 4.7619vw, 5rem), calc((100% - 75rem) / 2));
+  }
+}
