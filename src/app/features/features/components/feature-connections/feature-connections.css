@@ -4,13 +4,13 @@
   stroke-width: 1.546;
 }
 
-/* Brand pulse travelling down each connector: Figma path trim, 2s linear loop, all five in step. */
+/* Brand pulse travelling down each connector: Figma path trim (2s there, slowed to 3s), all five in step. */
 .connector-pulse {
   stroke: var(--bg-brand);
   stroke-width: 2.577;
   stroke-linecap: round;
   stroke-dasharray: 0 1;
-  animation: connector-pulse 2s linear infinite;
+  animation: connector-pulse 3s linear infinite;
 }
 
 @keyframes connector-pulse {
@@ -37,7 +37,7 @@
   }
 }
 
-/* Same pulse timing, then a 4s rest (Figma: 6s loop). */
+/* Same 3s pulse, then a 2s rest (Figma rests 4s). */
 .connector-pulse-spaced {
   animation-name: connector-pulse-spaced;
   animation-duration: 6s;
@@ -49,17 +49,17 @@
     stroke-dashoffset: 0;
     visibility: hidden;
   }
-  5.833% {
+  10.5% {
     stroke-dasharray: 0.2188 1;
     stroke-dashoffset: 0;
     visibility: visible;
   }
-  26.667% {
+  48% {
     stroke-dasharray: 0.2188 1;
     stroke-dashoffset: -0.7812;
     visibility: visible;
   }
-  32.5%,
+  58.5%,
   100% {
     stroke-dasharray: 0 1;
     stroke-dashoffset: -1;

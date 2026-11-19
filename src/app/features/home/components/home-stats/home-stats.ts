@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router';
 import type { HomeStatsContent } from './home-stats.model';
 
 // Figma: each testimonial holds 10s, then smart-animates to the next over 0.3s.
-const HOLD_MS = 10_000;
+const HOLD_MS = 5_000;
 
 // Pitch, link and rotating testimonial beside the three headline figures; one column below xl.
 @Component({

@@ -20,7 +20,7 @@ const CONNECTOR_PATHS: Record<number, string[]> = {
 };
 
 // "Turn information into execution" section: a hub fanning out to the activities it feeds.
-// From md the connectors are inline SVG so a pulse can run along each path (Figma path trim, 2s loop);
+// From md the connectors are inline SVG so a pulse can run along each path (Figma path trim, 3s loop);
 // phones get the vertical tree of the phone frame, drawn with borders.
 @Component({
   selector: 'app-feature-connections',
