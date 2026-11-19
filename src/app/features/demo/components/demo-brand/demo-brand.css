@@ -1,0 +1,143 @@
+/* Feature-search mock. Every length is a multiple of --u (16px at Figma's size), so the
+   backplate and the card scale together with the panel instead of being cropped. */
+.demo-art {
+  position: relative;
+  flex-shrink: 0;
+  aspect-ratio: 370 / 290;
+  container-type: size;
+  /* Figma fade mask: opaque for the first 76%, gone at the bottom edge. */
+  mask-image: linear-gradient(to bottom, #000 76%, transparent);
+}
+
+/* Phone frame: the mock at 0.6x of a 370px-wide shot. */
+.demo-art-stage {
+  --u: 2.5946cqw;
+  position: absolute;
+  inset-block-start: calc(var(--u) * 1.52);
+  inset-inline-start: 0;
+}
+
+/* Tablet frame: full size in a 728px-wide shot. */
+@media (width >= 48rem) {
+  .demo-art {
+    aspect-ratio: 728 / 430;
+  }
+
+  .demo-art-stage {
+    --u: 2.198cqw;
+    inset-block-start: calc(var(--u) * 1.3125);
+  }
+}
+
+/* Beside the form the mock takes the height the panel has left and shrinks or grows to fit it. */
+@media (width >= 64rem) {
+  .demo-art {
+    flex: 1;
+    min-height: 0;
+    aspect-ratio: auto;
+    mask-image: linear-gradient(to bottom, #000 61%, transparent);
+  }
+
+  /* Full size in Figma's 640 x 510 area; the smaller of the two ratios wins. */
+  .demo-art-stage {
+    --u: min(2.5cqw, 3.137cqh);
+    inset-block-start: 0;
+  }
+}
+
+.demo-art-backplate {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: calc(var(--u) * 4.0625);
+  width: calc(var(--u) * 50.375);
+  height: calc(var(--u) * 34.5625);
+  border: calc(var(--u) * 0.07) solid rgb(255 255 255 / 0.28);
+  border-radius: calc(var(--u) * 1.25);
+  background-color: rgb(255 255 255 / 0.12);
+}
+
+.demo-art-card {
+  position: absolute;
+  inset-block-start: calc(var(--u) * 3.4375);
+  inset-inline-start: 0;
+  width: calc(var(--u) * 47.6);
+  overflow: hidden;
+  border-radius: calc(var(--u) * 1.12);
+  background-color: var(--bg-surface);
+  box-shadow: 0 calc(var(--u) * 1.68) calc(var(--u) * 3.92) 0 rgb(10 18 64 / 0.3);
+  color: var(--text-primary);
+  font-size: calc(var(--u) * 0.98);
+  line-height: 1.25;
+}
+
+.demo-art-prompt {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.98);
+  padding-block: calc(var(--u) * 1.26);
+  padding-inline: calc(var(--u) * 1.54) calc(var(--u) * 4.48);
+  border: calc(var(--u) * 0.105) solid var(--border-brand);
+  border-start-start-radius: calc(var(--u) * 1.12);
+  border-start-end-radius: calc(var(--u) * 1.12);
+  color: var(--text-tertiary);
+  font-size: calc(var(--u) * 1.12);
+}
+
+.demo-art-logo {
+  flex-shrink: 0;
+  width: calc(var(--u) * 2.75);
+  height: calc(var(--u) * 2.75);
+}
+
+.demo-art-caret {
+  flex-shrink: 0;
+  width: calc(var(--u) * 0.105);
+  height: calc(var(--u) * 1.54);
+  background-color: var(--text-primary);
+}
+
+.demo-art-features {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 1.26);
+  padding-block: calc(var(--u) * 1.54) calc(var(--u) * 1.96);
+  padding-inline: calc(var(--u) * 1.68) calc(var(--u) * 4.48);
+}
+
+.demo-art-label {
+  font-weight: 500;
+}
+
+.demo-art-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(var(--u) * 1.4);
+}
+
+.demo-art-column {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 0.7);
+}
+
+.demo-art-feature {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.84);
+  white-space: nowrap;
+}
+
+.demo-art-tile {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: calc(var(--u) * 2.125);
+  height: calc(var(--u) * 2.125);
+  border-radius: calc(var(--u) * 0.375);
+  background-color: var(--bg-canvas);
+}
+
+.demo-art-tile img {
+  width: calc(var(--u) * 1.25);
+  height: calc(var(--u) * 1.25);
+}

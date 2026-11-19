@@ -1,0 +1,116 @@
+@let c = content();
+
+<div class="mx-auto w-full lg:max-w-130">
+  @if (status() === 'sent') {
+    <div role="status" class="flex flex-col items-center gap-6 py-16 text-center md:py-24">
+      <span class="rounded-full bg-brand-subtle p-5">
+        <img src="/icons/shared/check-brand.svg" alt="" width="32" height="32" />
+      </span>
+      <div class="flex flex-col gap-2">
+        <h2 class="text-h3 text-fg">{{ c.success.title }}</h2>
+        <p class="text-body-md text-fg-secondary">{{ c.success.description }}</p>
+      </div>
+      <a
+        class="btn btn-md btn-secondary gap-2 border-line px-6 hover:border-line-strong hover:text-fg"
+        routerLink="/"
+        (click)="close()"
+      >
+        <!-- The file points right; "back" points left in English and right in Arabic. -->
+        <img
+          src="/icons/shared/arrow-right.svg"
+          alt=""
+          width="18"
+          height="18"
+          class="ltr:-scale-x-100"
+        />
+        {{ c.success.back }}
+      </a>
+    </div>
+  } @else {
+    <form
+      class="flex flex-col gap-7 lg:short:gap-5"
+      novalidate
+      [formGroup]="form"
+      (ngSubmit)="submit()"
+    >
+      <div class="flex flex-col gap-2">
+        <h2 class="text-h3 text-fg">{{ c.title }}</h2>
+        <p class="text-body-sm text-fg-secondary">{{ c.description }}</p>
+      </div>
+
+      <div class="grid gap-x-4 gap-y-5 md:grid-cols-2 lg:short:gap-y-4">
+        @for (field of c.fields; track field.id) {
+          @let message = error(field);
+          <div class="flex flex-col gap-2" [class.md:col-span-2]="!field.half">
+            <label
+              class="text-label-md"
+              [class]="status() === 'sending' ? 'text-fg-tertiary' : 'text-fg'"
+              [for]="'demo-' + field.id"
+            >
+              {{ field.label }}
+            </label>
+            @if (field.type === 'textarea') {
+              <textarea
+                class="input h-30 resize-none lg:short:h-24"
+                [id]="'demo-' + field.id"
+                [formControlName]="field.id"
+                [placeholder]="field.placeholder"
+                [attr.autocomplete]="field.autocomplete"
+                [attr.aria-invalid]="message ? 'true' : null"
+                [attr.aria-describedby]="message ? 'demo-' + field.id + '-error' : null"
+              ></textarea>
+            } @else {
+              <input
+                class="input h-12"
+                [class.rtl:text-right]="field.ltr"
+                [attr.dir]="field.ltr ? 'ltr' : null"
+                [id]="'demo-' + field.id"
+                [type]="field.type"
+                [formControlName]="field.id"
+                [placeholder]="field.placeholder"
+                [attr.autocomplete]="field.autocomplete"
+                [attr.aria-required]="field.required"
+                [attr.aria-invalid]="message ? 'true' : null"
+                [attr.aria-describedby]="message ? 'demo-' + field.id + '-error' : null"
+              />
+            }
+            @if (message) {
+              <p class="text-caption text-error" [id]="'demo-' + field.id + '-error'">
+                {{ message }}
+              </p>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="flex flex-col gap-3">
+        @if (status() === 'failed') {
+          <p role="alert" class="text-body-sm text-error">{{ c.failed }}</p>
+        }
+        @if (status() === 'sending') {
+          <button appButton type="submit" class="h-13 w-full gap-2 disabled:opacity-100" disabled>
+            <img
+              src="/icons/shared/spinner-white.svg"
+              alt=""
+              width="18"
+              height="18"
+              class="animate-spin motion-reduce:animate-none"
+            />
+            {{ c.sending }}
+          </button>
+        } @else {
+          <button
+            appButton
+            type="submit"
+            class="h-13 w-full gap-2"
+            icon="/icons/shared/arrow-right-white.svg"
+            directionalIcon
+          >
+            {{ c.submit }}
+          </button>
+        }
+        <p class="text-center text-caption text-fg-secondary">{{ c.consent }}</p>
+      </div>
+    </form>
+  }
+</div>

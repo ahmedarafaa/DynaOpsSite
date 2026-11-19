@@ -30,6 +30,7 @@ import { WHOLESALE_DISTRIBUTION_SEO } from './features/industries/wholesale-dist
 import { ABOUT_SEO } from './features/about/about-seo';
 import { BLOG_SEO } from './features/blog/blog-seo';
 import { LICENSE_ENFORCEMENT_2025_SEO } from './features/blog/microsoft-license-enforcement-2025/microsoft-license-enforcement-2025-seo';
+import { DEMO_SEO } from './features/demo/demo-seo';
 import { HOME_SEO } from './features/home/home-seo';
 import { INTEGRATION_SEO } from './features/integration/integration-seo';
 import { NOT_FOUND_CONTENT } from './features/not-found/not-found-content';
@@ -267,6 +268,12 @@ export const routes: Routes = [
     loadComponent: () => import('./features/about/about').then((m) => m.About),
     title: ABOUT_SEO.title,
     data: { seo: { description: ABOUT_SEO.description } satisfies RouteSeo },
+  },
+  {
+    path: 'demo',
+    loadComponent: () => import('./features/demo/demo').then((m) => m.Demo),
+    title: DEMO_SEO.title,
+    data: { seo: { description: DEMO_SEO.description } satisfies RouteSeo },
   },
   {
     path: 'blog',

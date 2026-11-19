@@ -7,7 +7,6 @@ function withRoutes(prefix: string, items: Omit<MegaPanelItem, 'href'>[]): MegaP
 }
 
 // Copy is English here; src/locale/ar/header.json carries the Arabic under the same ids.
-// Rows marked "stand-in" use the closest existing file; the Figma icon has no export yet.
 const FEATURE_ITEMS = withRoutes('/features', [
   {
     id: 'customer-management',
@@ -35,7 +34,7 @@ const FEATURE_ITEMS = withRoutes('/features', [
   },
   {
     id: 'van-sales',
-    icon: '/icons/features/truck-return.svg', // stand-in: delivery-truck-01
+    icon: '/icons/features/delivery-truck-01.svg',
     title: $localize`:@@header.feature.van-sales.title:Van Sales & Van Stock`,
     description: $localize`:@@header.feature.van-sales.description:Direct sales with vehicle stock visibility`,
   },

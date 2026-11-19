@@ -33,6 +33,7 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'features', renderMode: RenderMode.Prerender },
   { path: 'integration', renderMode: RenderMode.Prerender },
   { path: 'about', renderMode: RenderMode.Prerender },
+  { path: 'demo', renderMode: RenderMode.Prerender },
   { path: 'blog', renderMode: RenderMode.Prerender },
   { path: 'blog/microsoft-license-enforcement-2025', renderMode: RenderMode.Prerender },
   { path: '**', renderMode: RenderMode.Server },

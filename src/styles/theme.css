@@ -171,3 +171,6 @@
     padding-inline: clamp(1rem, 4.7619vw, 5rem);
   }
 }
+
+/* Laptop-height screens (under 752px): `short:` tightens layouts that must fit one screen, e.g. Book a Demo. */
+@custom-variant short (@media (height < 47rem));

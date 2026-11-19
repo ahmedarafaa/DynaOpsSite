@@ -1,0 +1,51 @@
+@let c = content();
+
+<a routerLink="/" class="self-start rounded-sm">
+  <img
+    src="/icons/logo/dynaops365Logo-white.svg"
+    [alt]="c.logoAlt"
+    width="237"
+    height="44"
+    class="h-8.5 w-auto md:h-10 lg:h-11"
+  />
+</a>
+
+<h1 class="pe-5 text-h2 text-fg-on-brand md:pe-10 md:text-h1 lg:pe-12 lg:text-display-md xl:pe-20">
+  {{ c.title }}
+</h1>
+
+<div aria-hidden="true" class="demo-art">
+  <div class="demo-art-stage">
+    <div class="demo-art-backplate"></div>
+    <div class="demo-art-card">
+      <div class="demo-art-prompt">
+        <img
+          src="/icons/shared/dyna-ai-logo.svg"
+          alt=""
+          width="34"
+          height="34"
+          class="demo-art-logo"
+        />
+        <span class="demo-art-caret"></span>
+        <p class="truncate">{{ c.art.prompt }}</p>
+      </div>
+      <div class="demo-art-features">
+        <p class="demo-art-label">{{ c.art.label }}</p>
+        <div class="demo-art-columns">
+          @for (column of c.art.columns; track $index) {
+            <ul class="demo-art-column">
+              @for (feature of column; track feature.icon) {
+                <li class="demo-art-feature">
+                  <span class="demo-art-tile">
+                    <img [src]="feature.icon" alt="" width="20" height="20" />
+                  </span>
+                  {{ feature.label }}
+                </li>
+              }
+            </ul>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

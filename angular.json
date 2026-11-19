@@ -114,6 +114,7 @@
               "src/locale/ar/about.json",
               "src/locale/ar/home.json",
               "src/locale/ar/blog.json",
+              "src/locale/ar/demo.json",
               "src/locale/ar/not-found.json"
             ],
             "subPath": "ar"

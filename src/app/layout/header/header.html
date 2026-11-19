@@ -44,6 +44,8 @@
           icon="/icons/shared/arrow-right-02-white.svg"
           directionalIcon
           [routerLink]="content.cta.href"
+          target="_blank"
+          rel="noopener"
           (click)="closeAll()"
         >
           {{ content.cta.label }}
@@ -170,6 +172,8 @@
         icon="/icons/shared/arrow-right-02-white.svg"
         directionalIcon
         [routerLink]="content.cta.href"
+        target="_blank"
+        rel="noopener"
         (click)="closeAll()"
       >
         {{ content.cta.label }}

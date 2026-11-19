@@ -1,5 +1,9 @@
-<app-header />
+@if (!bare()) {
+  <app-header />
+}
 <main>
   <router-outlet />
 </main>
-<app-footer />
+@if (!bare()) {
+  <app-footer />
+}
