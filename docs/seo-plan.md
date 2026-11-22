@@ -206,14 +206,13 @@ Each URL also needs its `/ar/` version.
 
 ### 4.5 Remove the temporary home redirect
 
-The new Home page replaces the redirect from `/` to the FMCG page. Remove it from all of these, or the new page won't be served:
+Done: the Home page is served at `/` and `/ar`.
 
-- [ ] `src/app/app.routes.ts` (the `''` redirect)
-- [ ] `public/.htaccess` (both root rules)
-- [ ] `public/web.config` (both root rules)
-- [ ] `scripts/write-static-redirects.mjs`, which would otherwise overwrite the Home page, along with its step in the `build` script in `package.json`. Keep its cleanup of `ar/web.config` and `ar/.htaccess`, because `/ar` breaks on IIS without it.
-
-Then add `''` as `RenderMode.Prerender` in `src/app/app.routes.server.ts`, and confirm `/` and `/ar` are in the sitemap.
+- [x] `src/app/app.routes.ts` (the `''` redirect)
+- [x] `public/.htaccess` (both root rules)
+- [x] `public/web.config` (both root rules)
+- [x] `scripts/write-static-redirects.mjs` no longer writes redirect pages. It is now `scripts/remove-locale-server-configs.mjs`, which only removes `ar/web.config` and `ar/.htaccess`, because `/ar` breaks on IIS with them.
+- [x] `''` is `RenderMode.Prerender` in `src/app/app.routes.server.ts`, and `/` and `/ar` are in the sitemap.
 
 ---
 

@@ -6,10 +6,6 @@ DirectorySlash Off
 
 RewriteEngine On
 
-# The site has no home page yet: send each language root to the FMCG page.
-RewriteRule ^$ /industries/fmcg [R=301,L]
-RewriteRule ^ar/?$ /ar/industries/fmcg [R=301,L]
-
 # /industries/fmcg/ -> /industries/fmcg
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^(.+)/$ /$1 [R=301,L]
