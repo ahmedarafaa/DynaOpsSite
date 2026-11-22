@@ -44,11 +44,16 @@
 />
 
 <div class="container-page mt-8 pb-6 md:hidden">
-  <img
-    [ngSrc]="content().mapMobile.src"
-    [alt]="content().mapAlt"
-    [width]="content().mapMobile.width"
-    [height]="content().mapMobile.height"
-    class="h-auto w-full"
-  />
+  <!-- Media-scoped like the desktop map, so each screen size downloads only its own hero art. -->
+  <picture>
+    <source [media]="mobileMedia" [srcset]="content().mapMobile.src" />
+    <img
+      [src]="placeholder"
+      [alt]="content().mapAlt"
+      [width]="content().mapMobile.width"
+      [height]="content().mapMobile.height"
+      fetchpriority="high"
+      class="h-auto w-full"
+    />
+  </picture>
 </div>

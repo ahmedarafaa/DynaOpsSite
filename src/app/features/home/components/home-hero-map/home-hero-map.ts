@@ -1,4 +1,3 @@
-import { NgOptimizedImage } from '@angular/common';
 import {
   afterNextRender,
   ChangeDetectionStrategy,
@@ -43,6 +42,12 @@ const vector = (
   height: number,
   reveal?: HeroMapReveal,
 ): HeroMapLayer => ({ file, x, y, w: width, width, height, reveal });
+
+// Matches Tailwind's md breakpoint, where the hero swaps the phone image for this map.
+export const HERO_MAP_MEDIA = '(min-width: 48rem)';
+// 1x1 transparent GIF: the <img> fallback when no <source> matches, so nothing is fetched.
+export const EMPTY_IMAGE =
+  'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 
 // Text-free art, identical in both languages, in Figma paint order.
 const BACK: HeroMapLayer[] = [
@@ -99,7 +104,6 @@ const TEXT_LAYERS: Record<Lang, HeroMapLayer[]> = {
 @Component({
   selector: 'app-home-hero-map',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgOptimizedImage],
   templateUrl: './home-hero-map.html',
   styleUrl: './home-hero-map.css',
   host: { class: 'block' },
@@ -110,6 +114,8 @@ export class HomeHeroMap {
   readonly alt = input.required<string>();
 
   protected readonly sharedDir = '/images/home/hero-map';
+  protected readonly media = HERO_MAP_MEDIA;
+  protected readonly placeholder = EMPTY_IMAGE;
   protected readonly back = BACK;
   protected readonly front = [
     ...MARKERS,

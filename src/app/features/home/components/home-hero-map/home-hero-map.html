@@ -1,19 +1,23 @@
+<!-- Layers load through a media-scoped <source>, so phones, where the map is hidden, never download them. -->
 <!-- 1440x637 Figma stage; every layer sits at its render bounds, so the scene scales as one image. -->
 <div class="hero-map relative aspect-1440/637 overflow-hidden" role="img" [attr.aria-label]="alt()">
   @for (layer of back; track layer.file) {
-    <img
-      #layer
-      [ngSrc]="src(layer)"
-      alt=""
-      [width]="layer.width"
-      [height]="layer.height"
-      priority
-      class="hero-map-layer absolute h-auto"
-      [attr.data-reveal]="layer.reveal ? '' : null"
-      [style.left.%]="(layer.x / 1440) * 100"
-      [style.top.%]="(layer.y / 637) * 100"
-      [style.width.%]="(layer.w / 1440) * 100"
-    />
+    <picture>
+      <source [media]="media" [srcset]="src(layer)" />
+      <img
+        #layer
+        [src]="placeholder"
+        alt=""
+        [width]="layer.width"
+        [height]="layer.height"
+        fetchpriority="high"
+        class="hero-map-layer absolute h-auto"
+        [attr.data-reveal]="layer.reveal ? '' : null"
+        [style.left.%]="(layer.x / 1440) * 100"
+        [style.top.%]="(layer.y / 637) * 100"
+        [style.width.%]="(layer.w / 1440) * 100"
+      />
+    </picture>
   }
 
   <!-- Route (Figma "Vector 9"), inline so its stroke can draw; viewBox origin is the path's render bounds. -->
@@ -37,17 +41,20 @@
   </svg>
 
   @for (layer of front; track $index) {
-    <img
-      #layer
-      [src]="src(layer)"
-      alt=""
-      [width]="layer.width"
-      [height]="layer.height"
-      class="hero-map-layer absolute h-auto"
-      [attr.data-reveal]="layer.reveal ? '' : null"
-      [style.left.%]="(layer.x / 1440) * 100"
-      [style.top.%]="(layer.y / 637) * 100"
-      [style.width.%]="(layer.w / 1440) * 100"
-    />
+    <picture>
+      <source [media]="media" [srcset]="src(layer)" />
+      <img
+        #layer
+        [src]="placeholder"
+        alt=""
+        [width]="layer.width"
+        [height]="layer.height"
+        class="hero-map-layer absolute h-auto"
+        [attr.data-reveal]="layer.reveal ? '' : null"
+        [style.left.%]="(layer.x / 1440) * 100"
+        [style.top.%]="(layer.y / 637) * 100"
+        [style.width.%]="(layer.w / 1440) * 100"
+      />
+    </picture>
   }
 </div>
