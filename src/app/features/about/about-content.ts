@@ -1,5 +1,6 @@
 import { ERP_STACK_IMAGES } from '../../shared/ui/erp-stack/erp-stack-content';
 import type { AboutContent } from './about.model';
+import type { AboutHeroSegment } from './components/about-hero/about-hero.model';
 
 // Copy is English here; src/locale/ar/about.json carries the Arabic under the same ids.
 // The challenge illustrations and the device photo carry UI text, so their folder is localized like the copy.
@@ -7,13 +8,33 @@ const dir = '/images/about-us';
 const localizedDir = $localize`:@@about.imageDir:/images/about-us`;
 const demo = '/demo';
 
+// Splits one translatable sentence on its marks: [[name]] is a brand-coloured name, **text** is bold.
+function segments(text: string): AboutHeroSegment[] {
+  return text
+    .split(/(\[\[.+?\]\]|\*\*.+?\*\*)/)
+    .filter(Boolean)
+    .map((part): AboutHeroSegment => {
+      if (part.startsWith('[[')) return { text: part.slice(2, -2), tone: 'brand' };
+      if (part.startsWith('**')) return { text: part.slice(2, -2), tone: 'strong' };
+      return { text: part };
+    });
+}
+
 export const ABOUT_CONTENT: AboutContent = {
   hero: {
-    product: { src: `${dir}/pill-dynaops.webp`, alt: 'DynaOps365' },
-    link: $localize`:@@about.hero.link:is built by`,
-    company: { src: `${dir}/pill-dynasystems.webp`, alt: 'DynaSystems' },
-    title: $localize`:@@about.hero.title:A software company focused on creating specialized business products and solutions around Microsoft Dynamics 365 Finance & Operations.`,
-    description: $localize`:@@about.hero.description:Our experience with Dynamics environments showed us a recurring challenge:\npowerful ERP processes do not always translate into simple, practical experiences for teams working outside the traditional ERP interface.`,
+    title: {
+      lead: $localize`:@@about.hero.title.lead:Built by People Who Understand`,
+      highlight: $localize`:@@about.hero.title.highlight:Microsoft Dynamics F&O`,
+    },
+    intro: segments(
+      $localize`:@@about.hero.intro:[[DynaOps]] is built by [[Dyna Systems]], a software company focused on creating specialized business products and solutions around **Microsoft Dynamics 365 Finance & Operations.**`,
+    ),
+    description: $localize`:@@about.hero.description:Our experience with Dynamics environments showed us a recurring challenge: powerful ERP processes do not always translate into simple, practical experiences for teams working outside the traditional ERP interface.`,
+    art: {
+      src: `${localizedDir}/hero-art.svg`,
+      width: Number($localize`:@@about.hero.artWidth:947`),
+      height: 560,
+    },
   },
   why: {
     title: $localize`:@@about.why.title:Why We Built DynaOps`,

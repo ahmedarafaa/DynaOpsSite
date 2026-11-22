@@ -1,0 +1,25 @@
+/* The Figma art frame is 441x352; each export also carries the grid around it up to the page
+   edge. Offsets are physical because the art is not mirrored, only cropped per language. */
+.about-hero-art {
+  position: relative;
+  aspect-ratio: 441 / 352;
+}
+
+/* English file: 947x560 with the frame at (386, 144), cut at the right page edge. */
+.about-hero-art img {
+  position: absolute;
+  top: -40.91%;
+  left: -87.53%;
+  width: 214.74%;
+  max-width: none;
+  height: auto;
+  /* Fade the grid out before the cut, for screens wider than the 1440 frame. */
+  mask-image: linear-gradient(to right, #000 85%, transparent);
+}
+
+/* Arabic file: 1189x560 with the frame at (120, 144), cut at the left page edge. */
+:host-context([dir='rtl']) .about-hero-art img {
+  left: -27.21%;
+  width: 269.61%;
+  mask-image: linear-gradient(to left, #000 92%, transparent);
+}

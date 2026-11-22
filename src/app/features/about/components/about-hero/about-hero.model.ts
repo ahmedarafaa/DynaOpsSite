@@ -1,15 +1,20 @@
-export interface AboutHeroLogo {
-  // 2x export of the Figma logo pill, 267x60.
+export interface AboutHeroArt {
+  // Figma export of the isometric hub with its grid; each language has its own crop of the grid.
   src: string;
-  alt: string;
+  width: number;
+  height: number;
+}
+
+export interface AboutHeroSegment {
+  text: string;
+  // Brand-coloured bold names, or plain bold.
+  tone?: 'brand' | 'strong';
 }
 
 export interface AboutHeroContent {
-  product: AboutHeroLogo;
-  // Text between the two pills: "is built by".
-  link: string;
-  company: AboutHeroLogo;
-  title: string;
-  // Line breaks follow the Figma frame.
+  // The highlight is the brand-coloured end of the headline.
+  title: { lead: string; highlight: string };
+  intro: AboutHeroSegment[];
   description: string;
+  art: AboutHeroArt;
 }

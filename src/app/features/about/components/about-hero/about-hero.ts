@@ -3,12 +3,13 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 import type { AboutHeroContent } from './about-hero.model';
 
-// Opener of the About page: "DynaOps365 is built by DynaSystems" in logo pills over the company statement.
+// Opener of the About page: headline and company statement beside the isometric hub illustration.
 @Component({
   selector: 'app-about-hero',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgOptimizedImage],
   templateUrl: './about-hero.html',
+  styleUrl: './about-hero.css',
   host: {
     class:
       'block overflow-hidden rounded-b-xl bg-linear-to-b/srgb from-transparent to-brand-500/20',
