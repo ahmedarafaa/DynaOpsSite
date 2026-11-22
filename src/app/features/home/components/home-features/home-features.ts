@@ -1,21 +1,45 @@
-import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
+import {
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { Button } from '../../../../shared/ui/button/button';
 import { HomeHeading } from '../home-heading/home-heading';
 import type { HomeFeaturesContent } from './home-features.model';
 
+// Tailwind's xl breakpoint, where the cards become an accordion.
+const ACCORDION_MEDIA = '(min-width: 80rem)';
+
 // From xl one feature is open at a time beside its mock-up; below xl every feature is a card.
 @Component({
   selector: 'app-home-features',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgTemplateOutlet, RouterLink, Button, HomeHeading],
+  imports: [RouterLink, Button, HomeHeading],
   templateUrl: './home-features.html',
+  styleUrl: './home-features.css',
   host: { class: 'block bg-canvas md:bg-transparent xl:bg-canvas' },
 })
 export class HomeFeatures {
   readonly content = input.required<HomeFeaturesContent>();
 
   protected readonly active = signal(0);
+  // CSS switches the layout; this only adds the toggle buttons and `inert`, so the server render needs no viewport.
+  protected readonly accordion = signal(false);
+
+  constructor() {
+    const destroyRef = inject(DestroyRef);
+    afterNextRender(() => {
+      const query = matchMedia(ACCORDION_MEDIA);
+      const sync = () => this.accordion.set(query.matches);
+      sync();
+      query.addEventListener('change', sync);
+      destroyRef.onDestroy(() => query.removeEventListener('change', sync));
+    });
+  }
 }

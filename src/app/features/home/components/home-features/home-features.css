@@ -1,0 +1,6 @@
+/* Below xl the features are cards, so their copy stays open whatever the accordion state is. */
+@media (width < 80rem) {
+  .feature-copy {
+    grid-template-rows: 1fr;
+  }
+}
