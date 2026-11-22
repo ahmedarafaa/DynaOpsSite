@@ -3,6 +3,7 @@
   "translations": {
     "header.logoAlt": "Dynamics 365 Ops، بين يديك",
 
+    "header.home": "الرئيسية",
     "header.tab.features": "الميزات",
     "header.tab.industries": "القطاعات",
     "header.tab.integration": "التكامل",

@@ -1,6 +1,16 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  effect,
+  inject,
+  input,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { LanguageService } from '../../../../core/i18n/language';
+import { articleSchema } from '../../../../core/seo/schemas';
+import { StructuredDataService } from '../../../../core/seo/structured-data';
 import { FooterCta } from '../../../../layout/footer/footer-cta.directive';
 import { Button } from '../../../../shared/ui/button/button';
 import { CtaContainer } from '../../../../shared/ui/cta-container/cta-container';
@@ -28,4 +38,19 @@ import type { BlogArticlePageContent } from './blog-article-page.model';
 })
 export class BlogArticlePage {
   readonly content = input.required<BlogArticlePageContent>();
+
+  constructor() {
+    const structuredData = inject(StructuredDataService);
+    const language = inject(LanguageService);
+    effect(() => {
+      const { cover, title, description, author, date } = this.content().hero;
+      structuredData.set('page', [
+        articleSchema(
+          { path: language.path(), title, description, image: cover.src, author, date },
+          language.lang,
+        ),
+      ]);
+    });
+    inject(DestroyRef).onDestroy(() => structuredData.remove('page'));
+  }
 }

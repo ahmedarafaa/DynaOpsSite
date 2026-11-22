@@ -29,6 +29,7 @@ export class SeoService {
       this.removeLocaleLinks();
     }
 
+    this.setProperty('og:type', seo.type ?? 'website');
     this.setProperty('og:title', title);
     this.setProperty('og:description', seo.description);
     this.setProperty('og:url', url);

@@ -1,6 +1,8 @@
 export interface FooterLink {
   label: string;
   href: string;
+  // Opens in a new tab, like every other link to the demo page.
+  newTab?: boolean;
 }
 
 export interface FooterColumn {

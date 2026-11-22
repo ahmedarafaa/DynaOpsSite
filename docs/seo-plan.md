@@ -141,7 +141,7 @@ You plan to build Home, About, Demo and the features. These pages are also linke
 - [ ] **Confirm the hashed asset and manifest cache rules.** `public/web.config` and `public/.htaccess` now set `public, max-age=31536000, immutable` on JS and CSS, and revalidate `site.webmanifest`, but this isn't confirmed until it's deployed.
 - [x] **Compression:** the temporary IIS host and the current `dynaops365.com` both already compress HTML, CSS and JS (checked 2026-11-04), so `web.config` adds nothing. `public/.htaccess` now compresses text files in case production runs Apache. Confirm the result at launch.
 - [ ] **Reduce the SVG download size.** The temporary host doesn't compress SVGs, and the ERP integration artwork is large (`base.svg` is 89 KB). IIS only allows this setting at server level, so ask the host, or optimize or convert those files.
-- [ ] **Expand the structured data** in the table in section 4.3.
+- [x] **Expanded the structured data.** `Organization` now has an `@id` and LinkedIn in `sameAs`. Home adds `WebSite`, `SoftwareApplication` and `FAQPage`, every indexable inner page gets `BreadcrumbList`, and blog articles get `BlogPosting` with `og:type=article` and their cover as the share image. Still open from section 4.3: `AboutPage` and `CollectionPage`. Validate with the Rich Results Test before launch.
 
 ### Polish
 

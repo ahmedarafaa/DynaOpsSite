@@ -82,7 +82,11 @@ export const FOOTER_CONTENT: FooterContent = {
           tab('integration'),
           tab('about'),
           tab('blog'),
-          { label: $localize`:@@footer.contact:Contact us`, href: '/contact' },
+          {
+            label: $localize`:@@footer.contact:Contact us`,
+            href: HEADER_CONTENT.cta.href,
+            newTab: true,
+          },
         ],
       ],
     },

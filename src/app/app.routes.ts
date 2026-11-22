@@ -288,7 +288,14 @@ export const routes: Routes = [
         (m) => m.MicrosoftLicenseEnforcement2025,
       ),
     title: LICENSE_ENFORCEMENT_2025_SEO.title,
-    data: { seo: { description: LICENSE_ENFORCEMENT_2025_SEO.description } satisfies RouteSeo },
+    data: {
+      seo: {
+        description: LICENSE_ENFORCEMENT_2025_SEO.description,
+        type: 'article',
+        image: '/images/blog/license-enforcement-2025-cover.webp',
+        imageAlt: LICENSE_ENFORCEMENT_2025_SEO.title,
+      } satisfies RouteSeo,
+    },
   },
   // Static copy of NotFound for FTP hosting; the server rules in public/ serve it as the 404 page.
   {

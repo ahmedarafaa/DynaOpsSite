@@ -4,6 +4,8 @@ export interface PageSeo {
   // Site-relative path or absolute URL; falls back to the site default.
   image?: string;
   imageAlt?: string;
+  // Open Graph type; 'website' when omitted.
+  type?: 'website' | 'article';
   // e.g. 'noindex'. Omit for indexable pages.
   robots?: string;
   // Use the title as given instead of appending the site name.
