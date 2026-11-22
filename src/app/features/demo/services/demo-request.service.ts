@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 
 import type { DemoRequest } from '../demo.model';
 
-// Placeholder: point this at the service that receives demo requests.
-const ENDPOINT = '/api/demo-requests';
+const ENDPOINT = 'https://dynaops-001-site8.ltempurl.com/api/Lead';
 
 @Injectable({ providedIn: 'root' })
 export class DemoRequestService {
