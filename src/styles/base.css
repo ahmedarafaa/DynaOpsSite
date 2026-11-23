@@ -15,8 +15,10 @@
   }
 
   /* Any element that switches language (lang="ar" / lang="en") re-resolves
-     its family; descendants inherit it. */
-  [lang] {
+     its family; descendants inherit it. `body` re-resolves it too, since the
+     inlined first-paint CSS sets the Arabic tokens on body, not on html. */
+  [lang],
+  body {
     font-family: var(--font-family-base);
   }
 

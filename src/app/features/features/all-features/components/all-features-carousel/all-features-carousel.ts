@@ -36,12 +36,21 @@ export class AllFeaturesCarousel {
   // Stays opaque under the incoming slide, so the page never shows through mid-fade.
   protected readonly previous = signal(-1);
   protected readonly paused = signal(false);
+  // Slides whose image is in the page: the first, then each one before its turn.
+  protected readonly mounted = signal<ReadonlySet<number>>(new Set([0]));
 
   private timer?: ReturnType<typeof setInterval>;
 
   constructor() {
     afterNextRender(() => {
-      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) this.startAutoplay();
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      this.startAutoplay();
+      // The second slide waits for the page to finish loading, so it never competes with the first.
+      if (document.readyState === 'complete') {
+        this.mount(1);
+      } else {
+        window.addEventListener('load', () => this.mount(1), { once: true });
+      }
     });
     inject(DestroyRef).onDestroy(() => clearInterval(this.timer));
   }
@@ -67,10 +76,16 @@ export class AllFeaturesCarousel {
     return index === this.previous() ? 'z-10' : 'opacity-0';
   }
 
+  private mount(...indexes: number[]): void {
+    const count = this.slides().length;
+    this.mounted.update((mounted) => new Set([...mounted, ...indexes.map((i) => i % count)]));
+  }
+
   protected show(index: number): void {
     const next = index % this.slides().length;
     if (next === this.active()) return;
     this.previous.set(this.active());
     this.active.set(next);
+    this.mount(next, next + 1);
   }
 }

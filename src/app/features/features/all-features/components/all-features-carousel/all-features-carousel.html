@@ -1,18 +1,21 @@
 <div role="group" aria-roledescription="carousel" [attr.aria-label]="label()">
   <!-- Every slide shares one grid cell, so the first sizes the stack. Only the active slide fades: in, over the
-       previous one; every other slide hides at once so an older image never shows through. -->
+       previous one; every other slide hides at once so an older image never shows through.
+       Slides join the page one step ahead of being shown, so the first paint loads a single image. -->
   <div class="grid">
     @for (slide of slides(); track slide.src; let i = $index) {
-      <img
-        [ngSrc]="slide.src"
-        [alt]="slide.alt"
-        [width]="slide.width"
-        [height]="slide.height"
-        [priority]="i === 0"
-        [attr.aria-hidden]="i !== active()"
-        class="col-start-1 row-start-1 h-auto w-full"
-        [class]="layerClass(i)"
-      />
+      @if (mounted().has(i)) {
+        <img
+          [ngSrc]="slide.src"
+          [alt]="slide.alt"
+          [width]="slide.width"
+          [height]="slide.height"
+          [priority]="i === 0"
+          [attr.aria-hidden]="i !== active()"
+          class="col-start-1 row-start-1 h-auto w-full"
+          [class]="layerClass(i)"
+        />
+      }
     }
   </div>
 

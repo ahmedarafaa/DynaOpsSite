@@ -29,15 +29,18 @@
           [style.left.%]="art().placement.left"
           [style.top.%]="art().placement.top"
           [style.width.%]="art().placement.width"
+          loading="lazy"
         />
         <img
           [src]="art().cursorLeft"
           alt=""
+          loading="lazy"
           class="visibility-cursor-left transition-transform duration-600 ease-out group-hover:translate-x-7.5 group-hover:-translate-y-3 motion-reduce:transition-none"
         />
         <img
           [src]="art().cursorRight"
           alt=""
+          loading="lazy"
           class="visibility-cursor-right transition-transform duration-600 ease-out group-hover:-translate-x-8.25 group-hover:-translate-y-13.75 motion-reduce:transition-none"
         />
       </div>

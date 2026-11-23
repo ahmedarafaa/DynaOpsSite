@@ -45,6 +45,7 @@ const IMAGE_POSITIONS: Record<CtaImagePosition, { layer: string; content: string
           alt=""
           [attr.width]="imageWidth()"
           [attr.height]="imageHeight()"
+          loading="lazy"
           [class]="imageCover() ? coverImageClass : IMAGE_SIZES[imageSize()]"
           [style.--cta-cover-offset]="imageCover() ? '-' + imageCoverOffset() + '%' : null"
         />

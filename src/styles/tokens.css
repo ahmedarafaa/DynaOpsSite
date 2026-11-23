@@ -93,8 +93,11 @@
 
   /* Font stacks */
   --font-family-latin:
-    'Montserrat', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-  --font-family-arabic: 'IBM Plex Sans Arabic', 'Montserrat', 'Segoe UI', Tahoma, Arial, sans-serif;
+    'Montserrat', 'Montserrat Fallback', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    Roboto, Arial, sans-serif;
+  --font-family-arabic:
+    'IBM Plex Sans Arabic', 'IBM Plex Sans Arabic Fallback', 'Montserrat', 'Segoe UI', Tahoma,
+    Arial, sans-serif;
 }
 
 /* --------------------------------------------------------------------------
@@ -142,9 +145,13 @@
    Sizes are shared; family, line-height and tracking switch with the
    language. Set <html lang="ar" dir="rtl"> for Arabic pages, or lang="ar"
    on any subtree for mixed content.
+   Attribute selectors, not :lang(): the build inlines for first paint only the rules
+   it can match below <html>, and it cannot match :lang() or <html> itself. The
+   `body` selector is what gets the Arabic rule inlined; without it Arabic pages
+   paint in English metrics first and then jump.
    -------------------------------------------------------------------------- */
 :root,
-:lang(en) {
+[lang|='en'] {
   --font-family-base: var(--font-family-latin);
 
   --line-height-display-lg: 3.75rem; /* 60 */
@@ -169,7 +176,8 @@
   --font-weight-subtitle: 500;
 }
 
-:lang(ar) {
+[lang|='ar'],
+[lang|='ar'] body {
   --font-family-base: var(--font-family-arabic);
 
   --line-height-display-lg: 4.75rem; /* 76 */

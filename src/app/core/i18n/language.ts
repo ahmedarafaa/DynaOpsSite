@@ -1,5 +1,5 @@
-import { Location } from '@angular/common';
-import { computed, DOCUMENT, inject, Injectable, LOCALE_ID } from '@angular/core';
+import { isPlatformServer, Location } from '@angular/common';
+import { computed, DOCUMENT, inject, Injectable, LOCALE_ID, PLATFORM_ID } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, map } from 'rxjs';
@@ -8,6 +8,12 @@ import type { Lang, Dir } from './language.model';
 
 export const LANGS: readonly Lang[] = ['en', 'ar'];
 export const DEFAULT_LANG: Lang = 'en';
+
+// The file each language's body text needs first; declared as @font-face in src/index.html.
+const FONT_PRELOAD: Record<Lang, string> = {
+  en: '/fonts/montserrat-latin.woff2',
+  ar: '/fonts/ibm-plex-sans-arabic-400-arabic.woff2',
+};
 
 // Each build has one LOCALE_ID; anything Arabic ('ar', 'ar-SA') is the Arabic site.
 export function langFromLocale(localeId: string): Lang {
@@ -49,5 +55,16 @@ export class LanguageService {
     const html = this.document.documentElement;
     html.setAttribute('lang', this.lang);
     html.setAttribute('dir', this.dir);
+
+    // Written into the server HTML only, so the browser fetches the font alongside the page.
+    if (isPlatformServer(inject(PLATFORM_ID))) {
+      const link = this.document.createElement('link');
+      // Attributes, not properties: the server DOM does not reflect `as` into the HTML.
+      const attrs = { rel: 'preload', as: 'font', type: 'font/woff2', crossorigin: 'anonymous' };
+      for (const [name, value] of Object.entries({ ...attrs, href: FONT_PRELOAD[this.lang] })) {
+        link.setAttribute(name, value);
+      }
+      this.document.head.appendChild(link);
+    }
   }
 }

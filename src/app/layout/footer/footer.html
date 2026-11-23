@@ -30,6 +30,7 @@
             [alt]="content.logoAlt"
             width="253"
             height="52"
+            loading="lazy"
             class="h-[52px] w-[253px]"
           />
         </a>
@@ -64,7 +65,14 @@
                   [attr.rel]="item.external ? 'noopener' : null"
                   class="flex rounded-sm p-4 transition-opacity hover:opacity-70 lg:p-0"
                 >
-                  <img [src]="item.icon" alt="" width="28" height="28" class="size-7" />
+                  <img
+                    [src]="item.icon"
+                    alt=""
+                    width="28"
+                    height="28"
+                    loading="lazy"
+                    class="size-7"
+                  />
                 </a>
               </li>
             }
@@ -85,6 +93,7 @@
       aria-hidden="true"
       width="1200"
       height="168"
+      loading="lazy"
       class="pointer-events-none hidden h-auto w-full max-w-300 select-none xl:block"
     />
   </div>
