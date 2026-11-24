@@ -52,6 +52,8 @@
     <!-- Each language has its own mock, so it is not mirrored. -->
     <img
       [ngSrc]="image().src"
+      ngSrcset="1x, 1.5x, 2x"
+      [loaderParams]="loaderParams()"
       [alt]="image().alt"
       [width]="image().width"
       [height]="image().height"

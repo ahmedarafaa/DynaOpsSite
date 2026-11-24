@@ -1,8 +1,9 @@
-import { NgOptimizedImage } from '@angular/common';
+import { IMAGE_LOADER, NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { Button } from '../../../../shared/ui/button/button';
+import { scaledImageLoader } from '../../../../shared/util/responsive-srcset';
 import { FEATURE_HERO_DEFAULTS } from './feature-hero-content';
 import type { FeatureHeroCta, FeatureHeroImage, FeatureHeroNoteParts } from './feature-hero.model';
 
@@ -13,6 +14,7 @@ import type { FeatureHeroCta, FeatureHeroImage, FeatureHeroNoteParts } from './f
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgOptimizedImage, RouterLink, Button],
   templateUrl: './feature-hero.html',
+  providers: [{ provide: IMAGE_LOADER, useValue: scaledImageLoader }],
   host: {
     class:
       'block overflow-hidden rounded-b-xl bg-linear-to-b/srgb from-transparent to-brand-500/20',
@@ -28,6 +30,9 @@ export class FeatureHero {
   readonly wideArabicTabletCopy = input(false);
   readonly image = input.required<FeatureHeroImage>();
   readonly cta = input<FeatureHeroCta>(FEATURE_HERO_DEFAULTS.cta);
+
+  // The file is twice the size it is shown at.
+  protected readonly loaderParams = computed(() => ({ width: this.image().width * 2 }));
 
   protected readonly noteParts = computed<FeatureHeroNoteParts | null>(() => {
     const note = this.note();

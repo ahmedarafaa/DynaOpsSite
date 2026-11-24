@@ -199,6 +199,6 @@ export const ABOUT_CONTENT: AboutContent = {
     title: $localize`:@@about.cta.title:Meet the Team Behind DynaOps`,
     description: $localize`:@@about.cta.description:If your organization runs Microsoft Dynamics 365 F&O and you are looking for a better way to connect your field sales operations with your ERP, we would be happy to show you what we have built.`,
     button: { label: $localize`:@@about.cta.button:Book a Demo`, href: demo },
-    image: { src: `${localizedDir}/footer-cta.webp`, width: 400, height: 294 },
+    image: { src: `${localizedDir}/footer-cta.webp`, width: 1200, height: 882 },
   },
 };

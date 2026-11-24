@@ -1,4 +1,4 @@
-import { NgOptimizedImage } from '@angular/common';
+import { IMAGE_LOADER, NgOptimizedImage } from '@angular/common';
 import {
   afterNextRender,
   ChangeDetectionStrategy,
@@ -9,6 +9,7 @@ import {
   signal,
 } from '@angular/core';
 
+import { heroSrcsetWidths, scaledImageLoader } from '../../../../../shared/util/responsive-srcset';
 import type { AllFeaturesSlide } from './all-features-carousel.model';
 
 // Figma: each slide holds 2.5s, then smart-animates to the next over 0.6s and loops.
@@ -20,6 +21,7 @@ const FADE_MS = 600;
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgOptimizedImage],
   templateUrl: './all-features-carousel.html',
+  providers: [{ provide: IMAGE_LOADER, useValue: scaledImageLoader }],
   host: {
     class: 'block',
     '(mouseenter)': 'paused.set(true)',
@@ -74,6 +76,10 @@ export class AllFeaturesCarousel {
       return 'z-20 transition-opacity duration-600 ease-in-out motion-reduce:transition-none';
     }
     return index === this.previous() ? 'z-10' : 'opacity-0';
+  }
+
+  protected srcsetWidths({ width }: AllFeaturesSlide): string {
+    return heroSrcsetWidths(width);
   }
 
   private mount(...indexes: number[]): void {

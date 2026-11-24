@@ -6,6 +6,7 @@ import {
   input,
 } from '@angular/core';
 
+import { scaledSrcset } from '../../util/responsive-srcset';
 import type { CtaImagePosition, CtaImageSize } from './cta-container.model';
 
 // Width of a positioned image: 440px by default; the device photo of the feature pages is 400 / 500 / full width.
@@ -15,6 +16,14 @@ const IMAGE_SIZES: Record<CtaImageSize, string> = {
   device: 'block w-full md:max-w-125 xl:max-w-100',
   compact: 'block w-full max-w-86 -mb-10.5',
 };
+
+// Rendered width per size for `sizes`; a cover image spans the frame.
+const IMAGE_SIZES_ATTR: Record<CtaImageSize, string> = {
+  default: '(min-width: 30rem) 440px, calc(100vw - 2rem)',
+  device: '(min-width: 80rem) 400px, (min-width: 48rem) 500px, calc(100vw - 2rem)',
+  compact: '344px',
+};
+const COVER_SIZES_ATTR = '(min-width: 80rem) 1200px, calc(100vw - 2rem)';
 
 const IMAGE_POSITIONS: Record<CtaImagePosition, { layer: string; content: string }> = {
   'top-start': { layer: 'xl:items-start xl:justify-start xl:pt-16', content: 'xl:ps-116' },
@@ -42,6 +51,8 @@ const IMAGE_POSITIONS: Record<CtaImagePosition, { layer: string; content: string
       <div aria-hidden="true" class="pointer-events-none" [class]="imageLayerClass()">
         <img
           [src]="src"
+          [attr.srcset]="srcset()"
+          [attr.sizes]="srcset() ? sizes() : null"
           alt=""
           [attr.width]="imageWidth()"
           [attr.height]="imageHeight()"
@@ -64,6 +75,8 @@ export class CtaContainer {
   readonly image = input<string>();
   readonly imageWidth = input<number>();
   readonly imageHeight = input<number>();
+  // The image has the smaller copies written by scripts/generate-responsive-images.mjs; needs the file's own `imageWidth`.
+  readonly imageScaled = input(false, { transform: booleanAttribute });
   // Fill the frame with the image instead of placing it at `imagePosition`.
   readonly imageCover = input(false, { transform: booleanAttribute });
   // Paint the gradient over the image rather than under it.
@@ -76,6 +89,15 @@ export class CtaContainer {
   readonly imageFirst = input(false, { transform: booleanAttribute });
 
   protected readonly IMAGE_SIZES = IMAGE_SIZES;
+
+  protected readonly srcset = computed(() => {
+    const src = this.image();
+    const width = this.imageWidth();
+    return this.imageScaled() && src && width ? scaledSrcset(src, width) : null;
+  });
+  protected readonly sizes = computed(() =>
+    this.imageCover() ? COVER_SIZES_ATTR : IMAGE_SIZES_ATTR[this.imageSize()],
+  );
 
   // Centred cover up to lg; from xl the image keeps its ratio and slides up by the offset, as Figma crops it.
   protected readonly coverImageClass =

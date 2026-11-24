@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
+import { densitySrcset } from '../../../../shared/util/responsive-srcset';
 import type { FeatureShowcaseContent } from './feature-showcase.model';
 
 // Page-specific section of a feature page: copy beside a product illustration from xl, stacked and centred below.
@@ -11,4 +12,6 @@ import type { FeatureShowcaseContent } from './feature-showcase.model';
 })
 export class FeatureShowcase {
   readonly content = input.required<FeatureShowcaseContent>();
+
+  protected readonly srcset = densitySrcset;
 }

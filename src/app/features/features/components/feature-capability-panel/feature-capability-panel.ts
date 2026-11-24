@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
+import { densitySrcset } from '../../../../shared/util/responsive-srcset';
 import type { FeatureCapabilityImage } from '../feature-capabilities/feature-capabilities.model';
 
 // Artwork panel of the capabilities section: brand glow, three guide rings and the capability mocks.
@@ -28,6 +29,7 @@ import type { FeatureCapabilityImage } from '../feature-capabilities/feature-cap
       <!-- The phone frame scales the mocks to 85% so they fit its 342px panel. -->
       <img
         [src]="image.src"
+        [srcset]="srcset(image.src)"
         alt=""
         loading="lazy"
         [width]="image.width"
@@ -41,4 +43,6 @@ import type { FeatureCapabilityImage } from '../feature-capabilities/feature-cap
 export class FeatureCapabilityPanel {
   readonly images = input.required<FeatureCapabilityImage[]>();
   readonly active = input(0);
+
+  protected readonly srcset = densitySrcset;
 }

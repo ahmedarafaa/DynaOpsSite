@@ -13,6 +13,7 @@
     <!-- Each language has its own export, so it is not mirrored. -->
     <img
       [src]="content().image.src"
+      [srcset]="srcset(content().image.src)"
       [alt]="content().image.alt"
       [width]="content().image.width"
       [height]="content().image.height"

@@ -109,7 +109,7 @@ const FOOTER_CTA: CtaContent = {
   title: $localize`:@@customer-management.cta.title:Give Your Sales Team Better Customer Context`,
   description: $localize`:@@customer-management.cta.description:See how DynaOps helps your team manage customer relationships, activities, visits, and sales information through one connected field sales solution.`,
   button: FEATURE_HERO_DEFAULTS.cta,
-  image: { src: `${dir}/footer-cta.webp`, width: 400, height: 294 },
+  image: { src: `${dir}/footer-cta.webp`, width: 1200, height: 882 },
 };
 
 export const CUSTOMER_MANAGEMENT_CONTENT: FeaturePageContent = {

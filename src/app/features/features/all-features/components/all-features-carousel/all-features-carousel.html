@@ -7,6 +7,9 @@
       @if (mounted().has(i)) {
         <img
           [ngSrc]="slide.src"
+          [ngSrcset]="srcsetWidths(slide)"
+          [loaderParams]="{ width: slide.width }"
+          sizes="(min-width: 27.5rem) 408px, calc(100vw - 2rem)"
           [alt]="slide.alt"
           [width]="slide.width"
           [height]="slide.height"

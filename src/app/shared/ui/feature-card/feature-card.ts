@@ -2,6 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { densitySrcset } from '../../util/responsive-srcset';
 import type { FeatureCardContent } from './feature-card.model';
 
 @Component({
@@ -14,6 +15,8 @@ import type { FeatureCardContent } from './feature-card.model';
 })
 export class FeatureCard {
   readonly content = input.required<FeatureCardContent>();
+
+  protected readonly srcset = densitySrcset;
 
   protected readonly cardClass =
     'card group h-full gap-6 p-2 transition duration-300 ease-out hover:border-line-brand hover:shadow-sm motion-reduce:transition-none';
