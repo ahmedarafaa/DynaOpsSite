@@ -11,11 +11,11 @@
           [alt]="content.logoAlt"
           width="237"
           height="44"
-          class="h-9 w-auto xl:h-11"
+          class="h-9 w-auto lg:h-11"
         />
       </a>
 
-      <nav class="hidden xl:block" [attr.aria-label]="content.menu.label">
+      <nav class="hidden lg:block" [attr.aria-label]="content.menu.label">
         <app-tabs
           [tabs]="content.tabs"
           [active]="openPanel()"
@@ -24,7 +24,7 @@
         />
       </nav>
 
-      <div class="hidden items-center gap-2 xl:flex">
+      <div class="hidden items-center gap-2 lg:flex">
         <a
           appButton
           variant="secondary"
@@ -57,7 +57,7 @@
         variant="ghost"
         iconOnly
         type="button"
-        class="size-11 xl:hidden"
+        class="size-11 lg:hidden"
         [attr.aria-label]="content.menu.open"
         [attr.aria-expanded]="menuOpen()"
         aria-controls="site-menu"
@@ -76,7 +76,7 @@
 
 @if (panel(); as open) {
   <div
-    class="pointer-events-none absolute inset-x-0 top-full hidden justify-center px-4 pt-1 xl:flex"
+    class="pointer-events-none absolute inset-x-0 top-full hidden justify-center px-4 pt-1 lg:flex"
     [id]="'nav-panel-' + openPanel()"
   >
     <app-mega-panel
@@ -100,7 +100,7 @@
     role="dialog"
     aria-modal="true"
     [attr.aria-label]="content.menu.label"
-    class="fixed inset-0 z-50 flex flex-col overflow-y-auto bg-surface/60 p-4 backdrop-blur-lg xl:hidden"
+    class="fixed inset-0 z-50 flex flex-col overflow-y-auto bg-surface/60 p-4 backdrop-blur-lg lg:hidden"
   >
     <div class="flex items-center justify-between py-4">
       <a routerLink="/" class="flex shrink-0 items-center rounded-sm" (click)="closeAll()">
