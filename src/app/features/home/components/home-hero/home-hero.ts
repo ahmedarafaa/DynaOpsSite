@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { HERO_MOBILE_WIDTHS, responsiveSrcset } from '../../../../shared/util/responsive-srcset';
 import { Button } from '../../../../shared/ui/button/button';
 import { EMPTY_IMAGE, HERO_MAP_MEDIA, HomeHeroMap } from '../home-hero-map/home-hero-map';
 import type { HomeHeroContent } from './home-hero.model';
@@ -22,4 +23,8 @@ export class HomeHero {
 
   protected readonly mobileMedia = `not all and ${HERO_MAP_MEDIA}`;
   protected readonly placeholder = EMPTY_IMAGE;
+  // The widest copy is the full size re-encoded smaller, so the original is left out.
+  protected readonly mobileSrcset = computed(() =>
+    responsiveSrcset(this.content().mapMobile.src, HERO_MOBILE_WIDTHS),
+  );
 }

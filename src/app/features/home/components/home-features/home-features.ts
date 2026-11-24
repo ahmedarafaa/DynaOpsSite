@@ -9,9 +9,10 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { HOME_FEATURE_WIDTHS, responsiveSrcset } from '../../../../shared/util/responsive-srcset';
 import { Button } from '../../../../shared/ui/button/button';
 import { HomeHeading } from '../home-heading/home-heading';
-import type { HomeFeaturesContent } from './home-features.model';
+import type { HomeFeatureItem, HomeFeaturesContent } from './home-features.model';
 
 // Tailwind's xl breakpoint, where the cards become an accordion.
 const ACCORDION_MEDIA = '(min-width: 80rem)';
@@ -31,6 +32,10 @@ export class HomeFeatures {
   protected readonly active = signal(0);
   // CSS switches the layout; this only adds the toggle buttons and `inert`, so the server render needs no viewport.
   protected readonly accordion = signal(false);
+
+  protected srcset({ src, width }: HomeFeatureItem['image']): string {
+    return responsiveSrcset(src, HOME_FEATURE_WIDTHS, width);
+  }
 
   constructor() {
     const destroyRef = inject(DestroyRef);

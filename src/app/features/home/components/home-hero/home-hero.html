@@ -46,7 +46,7 @@
 <div class="container-page mt-8 pb-6 md:hidden">
   <!-- Media-scoped like the desktop map, so each screen size downloads only its own hero art. -->
   <picture>
-    <source [media]="mobileMedia" [srcset]="content().mapMobile.src" />
+    <source [media]="mobileMedia" [srcset]="mobileSrcset()" sizes="calc(100vw - 2rem)" />
     <img
       [src]="placeholder"
       [alt]="content().mapAlt"

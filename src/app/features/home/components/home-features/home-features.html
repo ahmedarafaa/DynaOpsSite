@@ -50,6 +50,7 @@
                 [class.xl:border-t]="i > 0"
               >
                 <!-- Figma panel: 332x342 on phones, 414x342 on tablet, 363x342 at 1024; mock-up card at its bottom-end corner. -->
+                <!-- `sizes` is the mock-up width per layout: 9/10, 4/5 and 5/6 of that panel. -->
                 <div
                   class="relative aspect-332/342 overflow-hidden rounded-lg border border-line-subtle bg-linear-to-t/srgb from-brand-500/30 to-transparent md:aspect-414/342 lg:aspect-363/342 lg:flex-1 xl:hidden"
                 >
@@ -58,6 +59,8 @@
                     alt=""
                     [width]="item.image.width"
                     [height]="item.image.height"
+                    [srcset]="srcset(item.image)"
+                    sizes="(min-width: 64rem) 290px, (min-width: 48rem) 333px, calc(90vw - 50px)"
                     loading="lazy"
                     class="absolute end-0 bottom-0 h-auto w-9/10 md:w-4/5 lg:w-5/6"
                   />
@@ -133,6 +136,8 @@
             alt=""
             [width]="item.image.width"
             [height]="item.image.height"
+            [srcset]="srcset(item.image)"
+            sizes="588px"
             loading="lazy"
             class="absolute end-0 bottom-0 h-auto w-full transition-opacity duration-300 ease-out motion-reduce:transition-none"
             [class.opacity-0]="i !== active()"
